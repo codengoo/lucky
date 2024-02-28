@@ -1,0 +1,17 @@
+{
+    "name": "ncn/lucky",
+    "description": "Make beautiful lucky cards",
+    "authors": [
+        {
+            "name": "Nghiacangao",
+            "homepage": "https://github.com/codengoo"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Lucky\\Includes\\": "includes/"
+        }
+    },
+    "require": {},
+    "require-dev": {}
+}

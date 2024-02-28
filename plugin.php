@@ -11,7 +11,7 @@
  * Text-Domain: textdomain
  */
 
-// use Lucky\Api\Admin;
+use Lucky\Includes\Admin;
 
 // Prevent public user to directly access file through URL. 
 // https://stackoverflow.com/questions/43212340
@@ -37,7 +37,7 @@ final class LK_Kickstart {
     }
 
     public function init_plugin() {
-        // init
+        new Admin();
     }
 
     // Singleton pattern
@@ -50,13 +50,13 @@ final class LK_Kickstart {
 
         return $instance;
     }
-    
+
     public function activate() {
         $is_installed = get_option('wplk_is_installed');
 
         if (!$is_installed) {
             update_option("wplk_is_installed", time());
-        } 
+        }
 
         return $is_installed;
     }
@@ -66,7 +66,7 @@ final class LK_Kickstart {
 
         if ($is_installed) {
             update_option("wplk_is_installed", null);
-        } 
+        }
 
         return $is_installed;
     }
