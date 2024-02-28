@@ -1,0 +1,11 @@
+{
+  "name": "wp-lucky",
+  "version": "1.0.0",
+  "description": "Make beautiful lucky cards",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "nghiacangao",
+  "license": "GPLv3"
+}
