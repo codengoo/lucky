@@ -10,6 +10,7 @@ class ComposerStaticInit42c134a308975cb30e0c68ebc4d2ff55
         'L' => 
         array (
             'Lucky\\Includes\\' => 15,
+            'Lucky\\Api\\' => 10,
         ),
     );
 
@@ -17,6 +18,10 @@ class ComposerStaticInit42c134a308975cb30e0c68ebc4d2ff55
         'Lucky\\Includes\\' => 
         array (
             0 => __DIR__ . '/../..' . '/includes',
+        ),
+        'Lucky\\Api\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/api',
         ),
     );
 

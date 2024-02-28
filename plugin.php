@@ -11,12 +11,15 @@
  * Text-Domain: textdomain
  */
 
-use Lucky\Includes\Admin;
 
 // Prevent public user to directly access file through URL. 
 // https://stackoverflow.com/questions/43212340
-
 if (!defined("ABSPATH")) exit;
+
+require_once 'vendor/autoload.php';
+
+use Lucky\Includes\Admin;
+use Lucky\Api\Api;
 
 final class LK_Kickstart {
     const VERSION = '1.0.0';
@@ -38,6 +41,7 @@ final class LK_Kickstart {
 
     public function init_plugin() {
         new Admin();
+        new Api();
     }
 
     // Singleton pattern

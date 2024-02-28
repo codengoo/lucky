@@ -3,7 +3,7 @@
         'name' => 'ncn/lucky',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '86b861224e9f027e4107cb4b675acacf94b68b57',
+        'reference' => '29d9ad26a46e83043a593299d23d3d62c6da2a97',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -13,7 +13,7 @@
         'ncn/lucky' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '86b861224e9f027e4107cb4b675acacf94b68b57',
+            'reference' => '29d9ad26a46e83043a593299d23d3d62c6da2a97',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

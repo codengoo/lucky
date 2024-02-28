@@ -7,4 +7,5 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'Lucky\\Includes\\' => array($baseDir . '/includes'),
+    'Lucky\\Api\\' => array($baseDir . '/api'),
 );
