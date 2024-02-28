@@ -32,10 +32,12 @@ final class LK_Kickstart {
     public function plugin_constants() {
         define('WPLK_VERSION', self::VERSION);
         define('WPLK_NONCE', self::NONCE);
-        define('WPLK_PLUGIN_PATH', trailingslashit(plugin_dir_path(__FILE__)));
-        define('WPLK_PLUGIN_URL', trailingslashit(plugins_url('', __FILE__)));
+        define('WPLK_PLUGIN_PATH', trailingslashit(plugin_dir_path(__FILE__))); // file path
+        define('WPLK_PLUGIN_URL', trailingslashit(plugins_url('', __FILE__))); // url path
+    }
 
-        error_log(print_r(constant("WPLK_VERSION"), true));
+    public function init_plugin() {
+        // init
     }
 
     // Singleton pattern
@@ -47,6 +49,26 @@ final class LK_Kickstart {
         }
 
         return $instance;
+    }
+    
+    public function activate() {
+        $is_installed = get_option('wplk_is_installed');
+
+        if (!$is_installed) {
+            update_option("wplk_is_installed", time());
+        } 
+
+        return $is_installed;
+    }
+
+    public function deactivate() {
+        $is_installed = get_option('wplk_is_installed');
+
+        if ($is_installed) {
+            update_option("wplk_is_installed", null);
+        } 
+
+        return $is_installed;
     }
 }
 
