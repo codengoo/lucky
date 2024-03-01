@@ -3,11 +3,8 @@
 namespace Lucky\Api;
 
 use WP_REST_Controller;
-use Lucky\Api\Admin\LK_Routing;
+use Lucky\Api\Admin\LK_Route;
 
-/**
- * Rest API Handler
- */
 class Api extends WP_REST_Controller {
     public function __construct() {
         add_action('rest_api_init', [$this, 'register_routes']);
@@ -15,6 +12,7 @@ class Api extends WP_REST_Controller {
 
 
     public function register_routes() {
-        (new LK_Routing())->register_routes();
+        error_log("heelo");
+        (new LK_Route())->register_routes();
     }
 }

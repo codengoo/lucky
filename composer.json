@@ -12,7 +12,5 @@
             "Lucky\\Includes\\": "includes/",
             "Lucky\\Api\\": "api/"
         }
-    },
-    "require": {},
-    "require-dev": {}
+    }
 }
