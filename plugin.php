@@ -19,6 +19,7 @@ if (!defined("ABSPATH")) exit;
 require_once 'vendor/autoload.php';
 
 use Lucky\Includes\Admin;
+use Lucky\Includes\Frontend;
 use Lucky\Api\Api;
 
 final class LK_Kickstart {
@@ -41,6 +42,7 @@ final class LK_Kickstart {
 
     public function init_plugin() {
         new Admin();
+        new Frontend();
         new Api();
     }
 
