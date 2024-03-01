@@ -2,5 +2,7 @@
     "/js/frontend.js": "/js/frontend.js",
     "/js/admin.js": "/js/admin.js",
     "/js/manifest.js": "/js/manifest.js",
-    "/js/vendor.js": "/js/vendor.js"
+    "/css/admin.css": "/css/admin.css",
+    "/js/vendor.js": "/js/vendor.js",
+    "/images/preview.png": "/images/preview.png"
 }

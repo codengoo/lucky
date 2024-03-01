@@ -4,9 +4,8 @@ namespace Lucky\Includes;
 
 class Admin {
     public function __construct() {
-        error_log("admin kkk");
         add_action("admin_menu", [$this, 'admin_menu']);
-        add_action("admin_enqueue_scripts", [$this, 'admin_content']);
+        add_action("admin_enqueue_scripts", [$this, 'admin_content'], 99);
     }
 
     public function admin_menu() {
@@ -47,9 +46,8 @@ class Admin {
     }
 
     public function admin_content() {
-        error_log("admin content");
+        $this->load_styles();
         $this->load_scripts();
-        // $this->load_styles();
     }
 
     public function load_scripts() {
@@ -61,16 +59,21 @@ class Admin {
         wp_enqueue_script('wplk-vendor');
         wp_enqueue_script('wplk-admin');
 
-        // wp_localize_script('wplk-admin', 'wplkAdminLocalizer', [
-        //     'adminUrl'  => admin_url('/'),
-        //     'ajaxUrl'   => admin_url('admin-ajax.php'),
-        //     'apiUrl'    => home_url('/wp-json'),
-        // ]);
+        wp_localize_script('wplk-admin', 'WPLKPath', [
+            'adminUrl'  => admin_url('/'),
+            'ajaxUrl'   => admin_url('admin-ajax.php'),
+            'apiUrl'    => home_url('/wp-json'),
+            'assets' => WPLK_PLUGIN_URL . 'assets/',
+        ]);
+    }
 
-        error_log("admin loaded");
+    public function load_styles() {
+        wp_register_style('wplk-admin', WPLK_PLUGIN_URL . 'assets/css/admin.css');
+
+        wp_enqueue_style('wplk-admin');
     }
 
     public function menu_page_template() {
-        echo '<div class="wrap"><div id="wplk-admin-app"></div></div>';
+        echo '<div id="wplk-admin-app"></div>';
     }
 }

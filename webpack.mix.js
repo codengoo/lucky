@@ -6,4 +6,11 @@ mix.autoload({
 })
 
 mix.js('src/frontend/index.js', 'assets/js/frontend.js').sourceMaps(false);
-mix.js('src/admin/index.js', 'assets/js/admin.js').sourceMaps(false).vue().extract(["vue"]);
+mix
+    .js('src/admin/index.js', 'assets/js/admin.js')
+    .sourceMaps(false)
+    .vue()
+    .extract(["vue"]);
+
+mix.css('src/admin/index.css', 'assets/css/admin.css');
+mix.copy("src/assets/images", "assets/images/");

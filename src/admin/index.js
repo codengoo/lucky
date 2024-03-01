@@ -1,4 +1,8 @@
 import { createApp } from "vue";
 import App from "./App.vue"
 
-createApp(App).mount('#wplk-admin-app')
+import './index.css'
+
+const app = createApp(App)
+app.config.globalProperties.window = window;
+app.mount('#wplk-admin-app');
