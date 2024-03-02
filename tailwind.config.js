@@ -13,6 +13,7 @@ module.exports = {
         'monte': ["Montserrat", ...defaultTheme.fontFamily.sans]
       }
     },
+    
   },
   plugins: [
     require('flowbite/plugin')
