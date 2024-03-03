@@ -12,7 +12,10 @@
                     <Input title="Lời chúc" type="text" id="wish" placeholder="Chúc mừng bạn" required />
                     <SelectImage />
                 </div>
-                <Button title="Tiếp tục" is_right />
+                <div class="flex justify-end gap-3">
+                    <Button title="Trước" @clickNext="backStep" back/>
+                    <Button title="Tiếp tục" @clickNext="nextStep"/>
+                </div>
             </form>
         </div>
     </div>
@@ -29,6 +32,15 @@ export default {
         Input,
         SelectImage,
         Button
+    },
+    methods: {
+        nextStep(){
+            this.$router.push('/create/step3')
+        },
+        backStep(){
+            console.log("ssss");
+            this.$router.push('/create')
+        }
     }
 }
 </script>

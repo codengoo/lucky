@@ -9,10 +9,19 @@
         <div class="pt-8 h-full">
             <form class="flex flex-col h-full justify-between">
                 <div>
-                    <Input title="Lời chúc" type="password" id="wish" placeholder="Chúc mừng bạn" required />
-                    <SelectImage />
+                    <div class="flex items-end gap-2">
+                        <Input title="Lời chúc" type="password" id="wish" placeholder="Chúc mừng bạn" required
+                            disabled />
+                       <div class="mb-5 flex gap-2">
+                        <Button title="Copy" />
+                        <Button title="Open" />
+                       </div>
+                    </div>
+
                 </div>
-                <Button title="Tiếp tục" is_right />
+                <div class="flex justify-end">
+                    <Button title="Hoàn thành" @clickNext="nextStep" />
+                </div>
             </form>
         </div>
     </div>
@@ -26,6 +35,11 @@ export default {
     components: {
         Input,
         Button
+    },
+    methods: {
+        nextStep() {
+            this.$router.push('/create')
+        }
     }
 }
 </script>

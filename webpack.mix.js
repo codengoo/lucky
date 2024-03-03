@@ -1,9 +1,16 @@
-const mix = require("laravel-mix")
+const mix = require("laravel-mix");
+const path = require('path');
 
 mix.setPublicPath('assets');
 mix.autoload({
     jquery: ['$', 'window.jQuery', 'JQuery']
 })
+
+mix.alias({
+    '@src': path.resolve(__dirname, 'src/'),
+    '@admin': path.resolve(__dirname, 'src/admin/'),
+    '@frontend': path.resolve(__dirname, 'src/admin/'),
+});
 
 mix.js('src/frontend/index.js', 'assets/js/frontend.js').sourceMaps(false);
 mix

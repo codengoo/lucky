@@ -1,5 +1,5 @@
 <template>
-    <div class="max-w-96 rounded-r-2xl overflow-hidden ">
+    <div class="max-w-96 rounded-r-2xl overflow-hidden shadow-xl">
         <img class="h-full" :src="window.WPLKPath.assets + 'images/preview.png'">
     </div>
 </template>

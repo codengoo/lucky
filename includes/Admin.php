@@ -9,7 +9,7 @@ use Lucky\Constants\App;
 class Admin {
     public function __construct() {
         add_action(Hook::AD_MENU, [$this, 'create_admin_menu']);
-        add_action("wp_enqueue_scripts", [$this, 'load_admin_content'], 99);
+        add_action(Hook::AD_ENQUEUE_SCRIPT, [$this, 'load_admin_content'], 99);
     }
 
     public function create_admin_menu() {

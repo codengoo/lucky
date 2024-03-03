@@ -2,11 +2,12 @@
     <div class="mb-5">
         <label :for="id" class="block mb-2 text-sm font-medium text-gray-900">{{ title }}</label>
         <div class="relative">
-            <input :type="type" :required="required" :id="id" :placeholder="placeholder"
+            <input :type="type" :required="required" :id="id" :placeholder="placeholder" ref="input"
+                :disabled="disabled"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 hidden-input-btn">
 
-            <div class="absolute inset-y-0 end-0 pe-2.5 flex items-center cursor-pointer">
-                <button>
+            <div v-if="!disabled" class="absolute inset-y-0 end-0 pe-2.5 flex items-center cursor-pointer">
+                <button @click="handleClear">
                     <svg class="w-6 h-6 text-gray-800 hover:text-blue-600" aria-hidden="true"
                         xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
                         <path fill-rule="evenodd"
@@ -20,14 +21,29 @@
 </template>
 
 <script>
+import { ref } from "vue";
+
 export default {
+    name: "Input",
     props: {
         title: String,
         type: String,
         required: Boolean,
         id: String,
         placeholder: String,
+        disabled: Boolean,
     },
-    name: "Input"
+    setup() {
+        const input = ref(null);
+
+        return { input }
+    },
+
+    methods: {
+        handleClear() {
+            this.input.value = "";
+        }
+    }
+
 }
 </script>

@@ -8,7 +8,7 @@ import Preview from "./components/preview.vue";
             <div class="w-full flex justify-center">
                 <div class="h-[70vh] bg-white shadow-lg border border-gray-200 rounded-2xl overflow-hidden flex">
                     <Preview />
-                    <router-view class="p-8 max-w-96 re-scroll flex flex-col" />
+                    <router-view class="p-8 pl-10 max-w-96 re-scroll flex flex-col" />
                 </div>
             </div>
         </div>
