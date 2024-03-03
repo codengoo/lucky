@@ -2,18 +2,18 @@
 
 namespace Lucky\Template;
 
+use Lucky\Constants\Hook;
+
 class Template {
     public function __construct() {
-        $this->create_custom_page();
-        add_filter('template_include', [$this, 'my_plugin_custom_template']);
+        add_filter(Hook::TM_INCLUDE, [$this, 'filter_template']);
     }
 
-    function create_custom_page() {
+    static function create_custom_page() {
         $page = get_page_by_path('lucky');
-
         if (!$page) {
-            $page_id = wp_insert_post(array(
-                'post_title'    => 'My Dynamic Page',
+            wp_insert_post(array(
+                'post_title'    => 'Lucky Page Theme',
                 'post_type'     => 'page',
                 'post_name'     => 'lucky',
                 'post_status'   => 'publish',
@@ -22,10 +22,17 @@ class Template {
         }
     }
 
-    function my_plugin_custom_template($template) {
+    static function delete_custom_page() {
+        $page = get_page_by_path('lucky');
+
+        if ($page) {
+            wp_delete_post($page->ID, true);
+        }
+    }
+
+    function filter_template($template) {
         if (is_page('lucky')) {
             $custom_template = plugin_dir_path(__FILE__) . 'template_theme.php';
-            error_log($custom_template);
             if (file_exists($custom_template)) {
                 return $custom_template;
             }

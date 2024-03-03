@@ -11,7 +11,8 @@
         "psr-4": {
             "Lucky\\Includes\\": "includes/",
             "Lucky\\Api\\": "api/",
-            "Lucky\\Template\\": "template/"
+            "Lucky\\Template\\": "template/",
+            "Lucky\\Constants\\": "constants/"
         }
     }
 }

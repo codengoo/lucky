@@ -58,5 +58,4 @@ const router = createRouter({
 const app = createApp(App)
 app.config.globalProperties.window = window;
 app.use(router);
-console.log(router);
 app.mount('#wplk-admin-app');

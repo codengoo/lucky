@@ -2,71 +2,44 @@
 
 namespace Lucky\Includes;
 
+use Lucky\Constants\Hook;
+
 class Frontend {
     public function __construct() {
-        // add_action('wp_enqueue_scripts', 'load_scripts');
+        error_log('frontend_content constructor');
+        add_action(Hook::WP_ENQUEUE_SCRIPT, [$this, 'load_frontend_content'], 99);
     }
 
-    function load_styles() {
+    public function load_frontend_content() {
+        error_log('frontend_content');
+
+        $this->load_styles();
+        $this->load_scripts();
     }
 
-    // function load_scripts() {
-    //     error_log(get_stylesheet_directory_uri());
-    //     wp_register_script(
-    //         'front_app',
-    //         get_stylesheet_directory_uri() . '/spa/dist/build.js',
-    //         [],
-    //         false,
-    //         true
-    //     );
+    public function load_scripts() {
+        wp_register_script('wplk-manifest', WPLK_PLUGIN_URL . 'assets/js/manifest.js', [], rand(), true);
+        wp_register_script('wplk-vendor', WPLK_PLUGIN_URL . 'assets/js/vendor.js', ['wplk-manifest'], rand(), true);
+        wp_register_script('wplk-frontend', WPLK_PLUGIN_URL . 'assets/js/frontend.js', [], rand(), true);
 
-    //     global $post;
+        wp_enqueue_script('wplk-manifest');
+        wp_enqueue_script('wplk-vendor');
+        wp_enqueue_script('wplk-frontend');
 
-    //     wp_localize_script(
-    //         'front_app',
-    //         'WPLK_Data',
-    //         [
-    //             'template_directory_uri' => get_stylesheet_directory_uri(),
-    //             'rest_url' => untrailingslashit(esc_url_raw(rest_url())),
-    //             'app_path' => $post->post_name
-    //         ]
-    //     );
+        global $post;
 
-    //     wp_enqueue_script('front_app');
-    // }
+        wp_localize_script('wplk-frontend', 'WPLKPathx', [
+            'admin'  => admin_url('/'),
+            'ajax'   => admin_url(''),
+            'api'    => home_url('/wp-json'),
+            'assets' => WPLK_PLUGIN_URL . 'assets/',
+            'post'   => $post
+        ]);
+    }
+
+    public function load_styles() {
+        wp_register_style('wplk-frontend', WPLK_PLUGIN_URL . 'assets/css/index.css');
+
+        wp_enqueue_style('wplk-frontend');
+    }
 }
-
-
-// function vuetwentyseventeen_enqueue_styles() {
-
-// 	$parent_style = 'parent-style';
-
-// 	wp_enqueue_style( $parent_style, get_template_directory_uri() . '/style.css' );
-// 	wp_enqueue_style( 'child-style',
-// 		get_stylesheet_directory_uri() . '/style.css',
-// 		array( $parent_style ),
-// 		wp_get_theme()->get( 'Version' )
-// 	);
-
-// 	// add Bootstrap to the child theme.
-// 	wp_register_style( // Bootstrap styles.
-// 		'vue_bootstrap_styles',
-// 		get_stylesheet_directory_uri() . '/assets/css/bootstrap.min.css',
-// 		array(),
-// 		false,
-// 		'all'
-// 	);
-
-// 	wp_register_script(  // Bootstrap scripts.
-// 		'vue_bootstrap_script',
-// 		get_stylesheet_directory_uri() . '/assets/js/bootstrap.min.js',
-// 		array( 'jquery' ),
-// 		false,
-// 		true
-// 	);
-
-// 	// enqueue the Bootstrap script and styles.
-// 	wp_enqueue_style( 'vue_bootstrap_styles' );
-// 	wp_enqueue_style( 'vue_bootstrap_script' );
-
-// }
