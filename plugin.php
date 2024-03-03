@@ -21,6 +21,7 @@ require_once 'vendor/autoload.php';
 use Lucky\Includes\Admin;
 use Lucky\Includes\Frontend;
 use Lucky\Api\Api;
+use Lucky\Template\Template;
 
 final class LK_Kickstart {
     const VERSION = '1.0.0';
@@ -31,6 +32,7 @@ final class LK_Kickstart {
         register_activation_hook(__FILE__, [$this, 'activate']);
         register_deactivation_hook(__FILE__, [$this, 'deactivate']);
         add_action('plugins_loaded', [$this, 'init_plugin']);
+        add_action('init', [$this, 'init_plugin_page']);
     }
 
     public function plugin_constants() {
@@ -42,8 +44,12 @@ final class LK_Kickstart {
 
     public function init_plugin() {
         new Admin();
-        new Frontend();
-        new Api();
+        // new Frontend();
+        // new Api();
+    }
+    
+    public function init_plugin_page() {
+        new Template();
     }
 
     // Singleton pattern

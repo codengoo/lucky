@@ -12,5 +12,5 @@ mix
     .vue()
     .extract(["vue"]);
 
-mix.css('src/admin/index.css', 'assets/css/admin.css');
+mix.css('src/index.css', 'assets/css/index.css');
 mix.copy("src/assets/images", "assets/images/");

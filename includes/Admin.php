@@ -9,7 +9,6 @@ class Admin {
     }
 
     public function admin_menu() {
-        // https://wordpress.org/documentation/article/roles-and-capabilities/#manage_options
         $capability = 'manage_options';
         $slug = 'lucky';
 
@@ -41,8 +40,6 @@ class Admin {
 
             remove_submenu_page("lucky", "lucky");
         }
-
-        // error_log(print_r($submenu, true));
     }
 
     public function admin_content() {
@@ -59,16 +56,19 @@ class Admin {
         wp_enqueue_script('wplk-vendor');
         wp_enqueue_script('wplk-admin');
 
+        global $post;
+
         wp_localize_script('wplk-admin', 'WPLKPath', [
             'adminUrl'  => admin_url('/'),
             'ajaxUrl'   => admin_url('admin-ajax.php'),
             'apiUrl'    => home_url('/wp-json'),
             'assets' => WPLK_PLUGIN_URL . 'assets/',
+            'app_path' => $post->post_name
         ]);
     }
 
     public function load_styles() {
-        wp_register_style('wplk-admin', WPLK_PLUGIN_URL . 'assets/css/admin.css');
+        wp_register_style('wplk-admin', WPLK_PLUGIN_URL . 'assets/css/index.css');
 
         wp_enqueue_style('wplk-admin');
     }

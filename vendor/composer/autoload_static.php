@@ -9,12 +9,17 @@ class ComposerStaticInit42c134a308975cb30e0c68ebc4d2ff55
     public static $prefixLengthsPsr4 = array (
         'L' => 
         array (
+            'Lucky\\Template\\' => 15,
             'Lucky\\Includes\\' => 15,
             'Lucky\\Api\\' => 10,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
+        'Lucky\\Template\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/template',
+        ),
         'Lucky\\Includes\\' => 
         array (
             0 => __DIR__ . '/../..' . '/includes',

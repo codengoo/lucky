@@ -13,3 +13,18 @@ input.hidden-input-btn::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
+
+::-webkit-scrollbar-track {
+  border-radius: 10px !important;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: red !important;
+  border-radius: 10px !important;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #b30000 !important;
+}

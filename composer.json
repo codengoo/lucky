@@ -10,7 +10,8 @@
     "autoload": {
         "psr-4": {
             "Lucky\\Includes\\": "includes/",
-            "Lucky\\Api\\": "api/"
+            "Lucky\\Api\\": "api/",
+            "Lucky\\Template\\": "template/"
         }
     }
 }
