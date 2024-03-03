@@ -14,7 +14,11 @@
                     <Input title="Chủ sở hữu" type="text" id="fullname" placeholder="Trịnh Văn Mớt" required />
                 </div>
                 <div class="flex justify-end">
-                    <Button title="Tiếp tục" @clickNext="nextStep"/>
+                    <Button title="Tiếp tục" @onClick="nextStep" icon>
+                        <template v-slot:icon>
+                            <RightIcon />
+                        </template>
+                    </Button>
                 </div>
             </form>
         </div>
@@ -26,13 +30,14 @@
 import Input from "@admin/components/input.vue";
 import Select from "@admin/components/select.vue";
 import Button from "@admin/components/button.vue";
+import RightIcon from 'vue-ionicons/dist/ios-arrow-forward.vue'
 
 import axios from "axios";
 
 export default {
     name: 'Setting1',
     components: {
-        Button, Input, Select
+        Button, Input, Select, RightIcon
     },
     data() {
         return {
@@ -43,7 +48,7 @@ export default {
         this.setup();
     },
     methods: {
-        async setup(){
+        async setup() {
             // this.banks = await this.getBankBins();
         },
 
@@ -64,7 +69,7 @@ export default {
             }
         },
 
-        nextStep(){
+        nextStep() {
             this.$router.push('/create/step2')
         }
     }

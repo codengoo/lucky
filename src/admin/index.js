@@ -11,6 +11,7 @@ import HistoryVue from "./pages/history/History.vue";
 import App from "./App.vue";
 
 import '../index.css';
+import 'vue-ionicons/ionicons.css';
 
 const routes = [
     {

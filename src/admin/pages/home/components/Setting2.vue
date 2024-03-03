@@ -13,8 +13,17 @@
                     <SelectImage />
                 </div>
                 <div class="flex justify-end gap-3">
-                    <Button title="Trước" @clickNext="backStep" back/>
-                    <Button title="Tiếp tục" @clickNext="nextStep"/>
+                    <Button @onClick="backStep" type="Alternative" icon_center>
+                        <template v-slot:icon_center>
+                            <LeftIcon />
+                        </template>
+                    </Button>
+                    <Button title="Tiếp tục" @onClick="nextStep" icon>
+
+                        <template v-slot:icon>
+                            <RightIcon />
+                        </template>
+                    </Button>
                 </div>
             </form>
         </div>
@@ -25,19 +34,23 @@
 import Input from "../../../components/input.vue";
 import SelectImage from "../../../components/select_image.vue";
 import Button from "../../../components/button.vue";
+import RightIcon from 'vue-ionicons/dist/ios-arrow-forward.vue'
+import LeftIcon from 'vue-ionicons/dist/ios-arrow-back.vue'
 
 export default {
     name: "Setting2",
     components: {
         Input,
         SelectImage,
-        Button
+        Button,
+        RightIcon,
+        LeftIcon
     },
     methods: {
-        nextStep(){
+        nextStep() {
             this.$router.push('/create/step3')
         },
-        backStep(){
+        backStep() {
             console.log("ssss");
             this.$router.push('/create')
         }

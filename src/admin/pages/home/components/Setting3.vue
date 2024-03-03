@@ -12,9 +12,18 @@
                     <Input title="Lời chúc" type="password" id="wish" placeholder="Chúc mừng bạn" required />
                     <SelectImage />
                 </div>
-                <div class="flex justify-end">
-                    <Button title="Trước" @clickNext="backStep" back />
-                    <Button title="Tiếp tục" @clickNext="nextStep" />
+                <div class="flex justify-end gap-3">
+                    <Button @onClick="backStep" type="Alternative" icon_center>
+                        <template v-slot:icon_center>
+                            <LeftIcon />
+                        </template>
+                    </Button>
+                    <Button title="Tiếp tục" @onClick="nextStep" icon>
+
+                        <template v-slot:icon>
+                            <RightIcon />
+                        </template>
+                    </Button>
                 </div>
             </form>
         </div>
@@ -24,11 +33,15 @@
 <script>
 import Input from "../../../components/input.vue";
 import Button from "../../../components/button.vue";
+import RightIcon from 'vue-ionicons/dist/ios-arrow-forward.vue'
+import LeftIcon from 'vue-ionicons/dist/ios-arrow-back.vue'
 export default {
     name: "Setting3",
     components: {
         Input,
-        Button
+        Button,
+        RightIcon,
+        LeftIcon
     },
     methods: {
         nextStep() {

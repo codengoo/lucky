@@ -12,15 +12,29 @@
                     <div class="flex items-end gap-2">
                         <Input title="Lời chúc" type="password" id="wish" placeholder="Chúc mừng bạn" required
                             disabled />
-                       <div class="mb-5 flex gap-2">
-                        <Button title="Copy" />
-                        <Button title="Open" />
-                       </div>
+                        <div class="mb-5 flex gap-2">
+                            <Button @onClick="nextStep" icon_center type="Alternative">
+                                
+                                <template v-slot:icon_center>
+                                    <OpenIcon />
+                                </template>
+                            </Button>
+                            <Button @onClick="nextStep" icon_center>
+                                <template v-slot:icon_center>
+                                    <CopyIcon />
+                                </template>
+                            </Button>
+                        </div>
                     </div>
 
                 </div>
-                <div class="flex justify-end">
-                    <Button title="Hoàn thành" @clickNext="nextStep" />
+                <div class="flex justify-end gap-3">
+                    <Button title="Hoàn thành" @onClick="nextStep" icon>
+
+                        <template v-slot:icon>
+                            <CheckIcon />
+                        </template>
+                    </Button>
                 </div>
             </form>
         </div>
@@ -30,11 +44,17 @@
 <script>
 import Input from "../../../components/input.vue";
 import Button from "../../../components/button.vue";
+import CheckIcon from "vue-ionicons/dist/ios-happy.vue"
+import CopyIcon from "vue-ionicons/dist/ios-copy.vue"
+import OpenIcon from "vue-ionicons/dist/ios-open.vue"
 export default {
     name: "Setting3",
     components: {
         Input,
-        Button
+        Button,
+        CheckIcon,
+        CopyIcon,
+        OpenIcon
     },
     methods: {
         nextStep() {
