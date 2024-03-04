@@ -983,6 +983,9 @@ input[type="range"]::-ms-fill-lower {
 .rounded-xl {
   border-radius: 0.75rem !important;
 }
+.rounded-3xl {
+  border-radius: 1.5rem !important;
+}
 .rounded-e-lg {
   border-start-end-radius: 0.5rem !important;
   border-end-end-radius: 0.5rem !important;

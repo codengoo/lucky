@@ -6,7 +6,7 @@ import Preview from "./components/preview.vue";
     <div>
         <div class="mt-20">
             <div class="w-full flex justify-center">
-                <div class="h-[70vh] bg-white shadow-lg border border-gray-200 rounded-2xl overflow-hidden flex">
+                <div class="h-[70vh] bg-white shadow-lg border border-gray-200 rounded-3xl overflow-hidden flex">
                     <div class="p-2 ps-5 flex justify-center items-center">
                         <Preview />
                     </div>
