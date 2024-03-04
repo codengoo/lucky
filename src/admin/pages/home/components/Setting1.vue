@@ -1,5 +1,5 @@
 <template>
-    <div ref="el">
+    <div>
         <div>
             <h1 class="text-3xl text-gray-950 font-monte font-bold">Thông tin tài khoản</h1>
             <h3 class="text=lg text-gray-500 font-monte">Tạo mã QR kèm lời chúc cho những người thân yêu
@@ -7,14 +7,17 @@
         </div>
 
         <div class="pt-8 h-full">
-            <form class="flex flex-col justify-between h-full">
+            <form class="flex flex-col justify-between h-full" @submit.prevent="handleNext($event)" ref="form_feed">
                 <div>
-                    <Select title="Ngân hàng" id="bank" placeholder="Chọn một ngân hàng" :data="banks" />
-                    <Input title="Số tài khoản" type="number" id="stk" placeholder="0123456789" required />
-                    <Input title="Chủ sở hữu" type="text" id="fullname" placeholder="Trịnh Văn Mớt" required />
+                    <Select title="Ngân hàng" id="bank" placeholder="Chọn một ngân hàng" :data="banks"
+                        :defaultValue="form.bank" />
+                    <Input title="Số tài khoản" type="number" id="acc_number" placeholder="0123456789" required
+                        :defaultValue="form.acc_number" />
+                    <Input title="Chủ sở hữu" type="text" id="acc_name" placeholder="Trịnh Văn Mớt" required
+                        :defaultValue="form.acc_name" />
                 </div>
                 <div class="flex justify-end">
-                    <Button title="Tiếp tục" @onClick="nextStep" icon>
+                    <Button title="Tiếp tục" icon submit>
                         <template v-slot:icon>
                             <RightIcon />
                         </template>
@@ -33,6 +36,8 @@ import Button from "@admin/components/button.vue";
 import RightIcon from 'vue-ionicons/dist/ios-arrow-forward.vue'
 
 import axios from "axios";
+import { ref } from "vue";
+import { mapGetters } from "vuex";
 
 export default {
     name: 'Setting1',
@@ -44,12 +49,34 @@ export default {
             banks: []
         }
     },
-    mounted() {
-        this.setup();
+    setup() {
+        const form_feed = ref(null);
+        return {
+            form_feed,
+            form: {
+                bank: "",
+                acc_number: "",
+                acc_name: ""
+            }
+        }
     },
+    mounted() {
+        this.fetchData();
+    },
+
+    computed: {
+        ...mapGetters(['get_account']),
+
+        form: {
+            get() {
+                return this.get_account;
+            }
+        }
+    },
+
     methods: {
-        async setup() {
-            // this.banks = await this.getBankBins();
+        async fetchData() {
+            this.banks = await this.getBankBins();
         },
 
         async getBankBins() {
@@ -71,6 +98,24 @@ export default {
 
         nextStep() {
             this.$router.push('/create/step2')
+        },
+
+        save() {
+            const formData = new FormData(this.form_feed);
+            let data = {};
+
+            formData.forEach(function (value, key) {
+                data[key] = value;
+            });
+
+            console.log(data);
+
+            this.$store.commit("update_account", data);
+        },
+
+        handleNext() {
+            this.save();
+            this.nextStep();
         }
     }
 }

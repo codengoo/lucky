@@ -1,55 +1,33 @@
 import { createApp } from "vue";
 import { createRouter, createWebHashHistory } from 'vue-router';
+import { createStore } from 'vuex'
 
-import HomeLayout from "./pages/home/layout.vue";
-import Setting1 from "./pages/home/components/Setting1.vue";
-import Setting2 from "./pages/home/components/Setting2.vue";
-import Setting3 from "./pages/home/components/Setting3.vue";
-import Setting4 from "./pages/home/components/Setting4.vue";
-import HistoryVue from "./pages/history/History.vue";
-
+import routes from "./routes";
+import mutations from "./store/mutation";
+import actions from "./store/action";
+import getters from "./store/getter";
 import App from "./App.vue";
 
+// Css
 import '../index.css';
 import 'vue-ionicons/ionicons.css';
 
-const routes = [
-    {
-        path: '/history',
-        name: "history",
-        component: HistoryVue
+const store = createStore({
+    state() {
+        return {
+            account: {
+                bank: "0",
+                acc_number: "0",
+                acc_name: "0"
+            },
+            wish: "Chúc mừng bạn",
+            password: ""
+        }
     },
-    {
-        path: "/",
-        redirect: "/create"
-    },
-    {
-        path: '/create',
-        component: HomeLayout,
-        children: [
-            {
-                path: '',
-                name: "create.step1",
-                component: Setting1,
-            },
-            {
-                path: 'step2',
-                name: "create.step2",
-                component: Setting2,
-            },
-            {
-                path: 'step3',
-                name: "create.step3",
-                component: Setting3,
-            },
-            {
-                path: 'step4',
-                name: "create.step4",
-                component: Setting4,
-            }
-        ]
-    }
-];
+    mutations,
+    actions,
+    getters
+})
 
 const router = createRouter({
     history: createWebHashHistory(),
@@ -59,4 +37,5 @@ const router = createRouter({
 const app = createApp(App)
 app.config.globalProperties.window = window;
 app.use(router);
+app.use(store);
 app.mount('#wplk-admin-app');

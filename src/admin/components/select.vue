@@ -1,7 +1,7 @@
 <template>
     <div class="mb-5">
         <label :for="id" class="block mb-2 text-sm font-medium text-gray-900">{{ title }}</label>
-        <select :id="id" :required="required"
+        <select :id="id" :required="required" :name="id" :value="defaultValue"
             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
             <option selected>{{ placeholder }}</option>
             <option v-if="data" v-for="item in data" :value="item.bin">
@@ -22,7 +22,8 @@ export default {
         placeholder: String,
         required: Boolean,
         id: String,
-        data: Array
+        data: Array,
+        defaultValue: String,
     },
 }
 </script>

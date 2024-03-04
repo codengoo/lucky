@@ -2,8 +2,8 @@
     <div class="mb-5">
         <label :for="id" class="block mb-2 text-sm font-medium text-gray-900">{{ title }}</label>
         <div class="relative">
-            <input :type="type" :required="required" :id="id" :placeholder="placeholder" ref="input"
-                :disabled="disabled"
+            <input :type="type" :required="required" :id="id" :placeholder="placeholder" ref="input" :name="id"
+                :disabled="disabled" :value="defaultValue"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 hidden-input-btn">
 
             <div v-if="!disabled" class="absolute inset-y-0 end-0 pe-2.5 flex items-center cursor-pointer">
@@ -32,10 +32,10 @@ export default {
         id: String,
         placeholder: String,
         disabled: Boolean,
+        defaultValue: String
     },
     setup() {
         const input = ref(null);
-
         return { input }
     },
 

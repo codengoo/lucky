@@ -1,10 +1,10 @@
 <template>
     <div class="">
-        <button type="button" @click="$emit('onClick')"
+        <button :type="submit ? 'submit' : 'button'" @click="$emit('onClick')"
             class="py-2.5 px-5 text-sm font-medium focus:z-10 focus:ring-4 focus:outline-none rounded-lg border text-center inline-flex items-center min-h-11"
             :class="type === 'Alternative'
-                ? 'bg-white text-gray-900 border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:ring-gray-100'
-                : 'text-white bg-blue-700 hover:bg-blue-800 border-blue-700 focus:ring-blue-300'">
+            ? 'bg-white text-gray-900 border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:ring-gray-100'
+            : 'text-white bg-blue-700 hover:bg-blue-800 border-blue-700 focus:ring-blue-300'">
             <span v-if="icon_start" class="me-2 text-lg flex flex-col justify-center">
                 <slot name="icon_start"></slot>
             </span>
@@ -28,6 +28,7 @@ export default {
         icon: Boolean,
         icon_start: Boolean,
         icon_center: Boolean,
+        submit: Boolean,
     },
 
 }
