@@ -6,14 +6,15 @@
     />
 
     <div class="pt-8 h-full">
-      <FormSetting @next="handleNext">
+      <Form @next="handleNext">
         <template v-slot:input_area>
           <Select
             title="Ngân hàng"
             id="bank"
             placeholder="Chọn một ngân hàng"
             :data="banks"
-            :defaultValue="account.bank"
+            :defaultValue="bank"
+            @update:model-value="handleBank"
           />
           <Input
             title="Số tài khoản"
@@ -21,7 +22,8 @@
             id="acc_number"
             placeholder="0123456789"
             required
-            :defaultValue="account.acc_number"
+            :defaultValue="acc_number"
+            @update:model-value="handleAccNumber"
           />
           <Input
             title="Chủ sở hữu"
@@ -29,7 +31,8 @@
             id="acc_name"
             placeholder="Trịnh Văn Mớt"
             required
-            :defaultValue="account.acc_name"
+            :defaultValue="acc_name"
+            @update:model-value="handleAccName"
           />
         </template>
 
@@ -40,7 +43,7 @@
             </template>
           </Button>
         </template>
-      </FormSetting>
+      </Form>
     </div>
   </div>
 </template>
@@ -52,7 +55,7 @@ import Input from "@admin/components/input.vue";
 import Select from "@admin/components/select.vue";
 import Button from "@admin/components/button.vue";
 import Header from "./header.vue";
-import FormSetting from "./form_setting.vue";
+import Form from "./form.vue";
 import RightIcon from "vue-ionicons/dist/ios-arrow-forward.vue";
 
 import { getBankBins } from "../utils";
@@ -67,7 +70,7 @@ export default defineComponent({
     Button,
     Header,
     RightIcon,
-    FormSetting,
+    Form,
   },
   data() {
     return {
@@ -78,8 +81,14 @@ export default defineComponent({
     this.fetchData();
   },
   computed: {
-    account() {
-      return this.$store.state.account;
+    acc_number() {
+      return this.$store.state.account.acc_number;
+    },
+    acc_name() {
+      return this.$store.state.account.acc_name;
+    },
+    bank() {
+      return this.$store.state.account.bank;
     },
   },
   methods: {
@@ -87,6 +96,41 @@ export default defineComponent({
       getBankBins().then((data) => {
         // @ts-ignore
         this.banks = data;
+      });
+    },
+
+    handleAccNumber(data: string) {
+      this.acc_number = data;
+
+      this.$store.commit(MutationTypes.UPDATE_ACCOUNT, {
+        bank: this.bank,
+        acc_name: this.acc_name,
+        acc_number: data,
+        bank_short: this.$store.state.account.bank_short,
+      });
+    },
+
+    handleAccName(data: string) {
+      this.acc_name = data;
+      this.$store.commit(MutationTypes.UPDATE_ACCOUNT, {
+        bank: this.bank,
+        acc_name: data,
+        acc_number: this.acc_number,
+        bank_short: this.$store.state.account.bank_short,
+      });
+    },
+
+    handleBank(data: string) {
+      this.bank = data;
+
+      this.$store.commit(MutationTypes.UPDATE_ACCOUNT, {
+        bank: data,
+        acc_name: this.acc_name,
+        acc_number: this.acc_number,
+        // @ts-ignore
+        bank_short:
+          // @ts-ignore
+          this.banks.filter((item) => item.bin === data)[0].shortName,
       });
     },
 

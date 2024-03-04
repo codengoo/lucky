@@ -6,7 +6,7 @@
     />
 
     <div class="pt-8 h-full">
-      <FormSetting @next="handleNext">
+      <Form @next="handleNext">
         <template v-slot:input_area>
           <Input
             title="Mật khẩu"
@@ -30,7 +30,7 @@
             </template>
           </Button>
         </template>
-      </FormSetting>
+      </Form>
     </div>
   </div>
 </template>
@@ -43,7 +43,7 @@ import Button from "@admin/components/button.vue";
 import RightIcon from "vue-ionicons/dist/ios-arrow-forward.vue";
 import LeftIcon from "vue-ionicons/dist/ios-arrow-back.vue";
 import Header from "./header.vue";
-import FormSetting from "./form_setting.vue";
+import Form from "./form.vue";
 
 import { MutationTypes } from "@admin/store/mutation";
 
@@ -55,7 +55,7 @@ export default defineComponent({
     RightIcon,
     LeftIcon,
     Header,
-    FormSetting,
+    Form,
   },
   computed: {
     password() {

@@ -6,7 +6,7 @@
     />
 
     <div class="pt-8 h-full">
-      <FormSetting @next="handleNext">
+      <Form @next="handleNext">
         <template v-slot:input_area>
           <div class="flex items-end gap-2">
             <Input
@@ -39,7 +39,7 @@
             </template>
           </Button>
         </template>
-      </FormSetting>
+      </Form>
     </div>
   </div>
 </template>
@@ -48,7 +48,7 @@
 import Input from "@admin/components/input.vue";
 import Button from "@admin/components/button.vue";
 import Header from "./header.vue";
-import FormSetting from "./form_setting.vue";
+import Form from "./form.vue";
 
 import CheckIcon from "vue-ionicons/dist/ios-happy.vue";
 import CopyIcon from "vue-ionicons/dist/ios-copy.vue";
@@ -63,7 +63,7 @@ export default {
     CopyIcon,
     OpenIcon,
     Header,
-    FormSetting,
+    Form,
   },
   computed: {
     link() {

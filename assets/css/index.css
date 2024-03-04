@@ -918,6 +918,12 @@ input[type="range"]::-ms-fill-lower {
 .w-full {
   width: 100% !important;
 }
+.w-96 {
+  width: 24rem !important;
+}
+.w-80 {
+  width: 20rem !important;
+}
 .max-w-96 {
   max-width: 24rem !important;
 }
@@ -961,9 +967,6 @@ input[type="range"]::-ms-fill-lower {
 }
 .gap-2 {
   gap: 0.5rem !important;
-}
-.gap-3 {
-  gap: 0.75rem !important;
 }
 .gap-4 {
   gap: 1rem !important;
@@ -1067,9 +1070,6 @@ input[type="range"]::-ms-fill-lower {
 .pl-10 {
   padding-left: 2.5rem !important;
 }
-.ps-5 {
-  padding-inline-start: 1.25rem !important;
-}
 .pt-8 {
   padding-top: 2rem !important;
 }
@@ -1136,6 +1136,9 @@ input[type="range"]::-ms-fill-lower {
   --tw-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1) !important;
   --tw-shadow-colored: 0 20px 25px -5px var(--tw-shadow-color), 0 8px 10px -6px var(--tw-shadow-color) !important;
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow) !important;
+}
+.filter {
+  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow) !important;
 }
 
 input[type="number"].hidden-input-btn {
