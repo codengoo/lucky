@@ -1,7 +1,3 @@
-<script setup>
-import Preview from "./components/preview.vue";
-</script>
-
 <template>
     <div>
         <div class="mt-20">
@@ -18,7 +14,13 @@ import Preview from "./components/preview.vue";
 </template>
 
 <script>
-export default {
+import { defineComponent } from "vue";
+import Preview from "./components/preview.vue";
+
+export default defineComponent({
     name: "HomeLayout",
-}
+    components: {
+        Preview
+    }
+})
 </script>

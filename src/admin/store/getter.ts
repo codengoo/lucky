@@ -5,6 +5,7 @@ export type AppGetter = {
     get_account(state: AppState): IAccount,
     get_wish(state: AppState): string,
     get_password(state: AppState): string
+    get_link(state: AppState): string
 }
 
 
@@ -17,6 +18,9 @@ const getters: GetterTree<AppState, AppState> & AppGetter = {
     },
     get_password(state): string {
         return state.password;
+    },
+    get_link(state) {
+        return state.link;
     },
 }
 

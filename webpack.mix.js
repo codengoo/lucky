@@ -6,17 +6,32 @@ mix.autoload({
     jquery: ['$', 'window.jQuery', 'JQuery']
 })
 
-mix.alias({
-    '@src': path.resolve(__dirname, 'src/'),
-    '@admin': path.resolve(__dirname, 'src/admin/'),
-    '@frontend': path.resolve(__dirname, 'src/admin/'),
+mix.webpackConfig({
+    resolve: {
+        extensions: ['.vue', '.ts', '.js'],
+        alias: {
+            '@src': path.resolve(__dirname, 'src/'),
+            '@admin': path.resolve(__dirname, 'src/admin/'),
+            '@frontend': path.resolve(__dirname, 'src/admin/'),
+        }
+    },
+    module: {
+        rules: [
+            {
+                test: /\.ts$/,
+                loader: 'ts-loader',
+                exclude: /node_module/,
+                options: { appendTsSuffixTo: [/\.vue$/] }
+            },
+        ],
+    },
 });
 
-mix.js('src/frontend/index.js', 'assets/js/frontend.js').sourceMaps(false);
+// mix.js('src/frontend/index.js', 'assets/js/frontend.js').sourceMaps(false);
 mix
-    .js('src/admin/index.js', 'assets/js/admin.js')
-    .sourceMaps(false)
     .vue()
+    .ts('src/admin/index.ts', 'assets/js/admin.js')
+    .sourceMaps(false)
     .extract(["vue"]);
 
 mix.css('src/index.css', 'assets/css/index.css');

@@ -5,7 +5,9 @@
 </template>
 
 <script>
-export default {
-    name: "Preview"
-}
+import { defineComponent } from 'vue';
+
+export default defineComponent({
+    name: 'Preview',
+})
 </script>

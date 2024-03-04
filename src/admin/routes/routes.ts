@@ -7,6 +7,7 @@ import Setting3 from "@admin/pages/home/components/Setting3.vue";
 import Setting4 from "@admin/pages/home/components/Setting4.vue";
 import HistoryVue from "@admin/pages/history/History.vue";
 
+
 const routes: Array<RouteRecordRaw> = [
     {
         path: '/history',
