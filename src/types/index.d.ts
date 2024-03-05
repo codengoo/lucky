@@ -14,6 +14,13 @@ declare global {
             'api': string,
             'assets': string,
             'page': string
-        }
+        },
+        WPLKPathx: {
+            'admin': string,
+            'ajax': string,
+            'api': string,
+            'assets': string,
+            'page': object
+        },
     }
 }

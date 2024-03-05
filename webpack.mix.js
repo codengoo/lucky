@@ -27,10 +27,15 @@ mix.webpackConfig({
     },
 });
 
-// mix.js('src/frontend/index.js', 'assets/js/frontend.js').sourceMaps(false);
 mix
     .vue()
     .ts('src/admin/index.ts', 'assets/js/admin.js')
+    .sourceMaps(false)
+    .extract(["vue"]);
+
+mix
+    .vue()
+    .ts('src/frontend/index.ts', 'assets/js/frontend.js')
     .sourceMaps(false)
     .extract(["vue"]);
 

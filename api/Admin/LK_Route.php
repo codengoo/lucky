@@ -50,18 +50,6 @@ class LK_Route extends WP_REST_Controller {
         return rest_ensure_response($response);
     }
 
-    public function get_card($request) {
-        $parameters = $request->get_body();
-        $data = json_decode($parameters);
-
-        $data = array(
-            'password' => $data->password,
-            'id' => $data->id,
-        );
-
-        Database::get_data($data);
-    }
-
     public function get_items_permission_check($request) {
         return true;
     }

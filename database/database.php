@@ -61,14 +61,33 @@ class Database {
 
         $table_name = $wpdb->prefix . App::DATABASE;
 
-        $data = $wpdb->get_results(
+        $result = $wpdb->get_results(
             $wpdb->prepare(
-                "SELECT * FROM $table_name WHERE id = %d",
-                $data->id
+                "SELECT * FROM $table_name WHERE id = %s",
+                $data["id"]
             )
         );
 
-        return $data;
+        if (count($result) > 0) {
+            $result = $result[0];
+
+            if (password_verify($data['password'], $result->password)) {
+                return [
+                    'id' => $result->id,
+                    'acc_name' => $result->acc_name,
+                    'acc_num' => $result->acc_num,
+                    'acc_bank' => $result->acc_bank,
+                    'acc_bank_short' => $result->acc_bank_short,
+                    'wish' => $result->wish,
+                    'image' => $result->image,
+                    'link' => $result->link,
+                ];
+            } else {
+                return [];
+            }
+        } else {
+            return [];
+        }
     }
 
 

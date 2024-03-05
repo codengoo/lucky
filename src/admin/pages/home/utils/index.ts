@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { AppState } from "@/admin/store/state";
 import axios from "axios";
 
@@ -51,15 +53,11 @@ export async function createCard(data: AppState): Promise<CardResponse> {
     const url = window.WPLKPath.api + "/lucky/v1/create";
 
     try {
-        const response = await axios.post<CardResponse>(url, data);
-
-        console.log(response, response.status, response.status == 200);
-        
-
+        const response = await axios.post<CardResponse>(url, data);        
         if (response.status == 200) {        
             return {
                 ok: response.data.ok,
-                link: window.WPLKPath.page + "/" + response.data.link,
+                link: window.WPLKPath.page + "?" + response.data.link,
             }
         } else {
             throw new Error("");
