@@ -136,7 +136,6 @@ export default defineComponent({
 
     handleNext(data: IAccount) {
       console.log(data);
-      this.$store.commit(MutationTypes.UPDATE_ACCOUNT, data);
       this.$router.push("/create/step2");
     },
   },

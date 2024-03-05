@@ -17,9 +17,12 @@ export default defineComponent({
     num() {
       return this.$store.state.account.acc_number;
     },
-    bank(){
+    bank() {
       return this.$store.state.account.bank_short;
-    }
+    },
+    image() {
+      return this.$store.state.image;
+    },
   },
   props: {
     url: String,
@@ -30,16 +33,24 @@ export default defineComponent({
       this.draw();
     },
     num: function (val) {
+      this.qr.src = `https://img.vietqr.io/image/${this.bank}-${this.num}-qr_only.png`;
       this.draw();
     },
     bank: function (val) {
+      this.qr.src = `https://img.vietqr.io/image/${this.bank}-${this.num}-qr_only.png`;
       this.draw();
+    },
+    image: function (val) {
+      console.log(val);
+      this.bg.src = window.WPLKPath.assets + val;
+      // this.draw();
     },
   },
 
   data() {
     return {
-      image: "",
+      bg: "",
+      qr: "",
       context: "",
     };
   },
@@ -61,21 +72,38 @@ export default defineComponent({
         this.context.imageSmoothingEnabled = false;
         this.canvas.width = rect.width;
         this.canvas.height = rect.height;
-        this.image = new Image();
-        this.image.src = this.$props.url;
-        this.image.onload = () => {
+        this.bg = new Image();
+        this.qr = new Image();
+        this.bg.src = this.$props.url;
+
+        this.bg.onload = () => {
+          this.draw();
+        };
+
+        this.qr.onload = () => {
           this.draw();
         };
       }
     },
 
     draw() {
-      this.drawImage(this.context, this.canvas, this.image);
+      this.drawImage();
+      this.drawQR();
       this.drawText();
     },
 
-    drawImage(context, canvas, image) {
-      context.drawImage(image, 0, 0, canvas.width, canvas.height);
+    drawImage() {
+      this.context.drawImage(
+        this.bg,
+        0,
+        0,
+        this.canvas.width,
+        this.canvas.height
+      );
+    },
+
+    drawQR() {
+      this.context.drawImage(this.qr, 10, 10, 110, 110);
     },
 
     drawText() {

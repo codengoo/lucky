@@ -9,7 +9,8 @@ export interface AppState {
     account: IAccount,
     wish: string,
     password: string,
-    link: string
+    link: string,
+    image: string,
 }
 
 const state: AppState = {
@@ -21,7 +22,8 @@ const state: AppState = {
     },
     password: "",
     wish: "Chúc mừng bạn",
-    link: ""
+    link: "",
+    image: "images/preview.png"
 }
 
 export default state;

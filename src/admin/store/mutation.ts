@@ -5,7 +5,8 @@ export enum MutationTypes {
     UPDATE_ACCOUNT = "UPDATE_ACCOUNT",
     UPDATE_WISH = "UPDATE_WISH",
     UPDATE_PASSWORD = "UPDATE_PASSWORD",
-    UPDATE_LINK = "UPDATE_LINK"
+    UPDATE_LINK = "UPDATE_LINK",
+    UPDATE_IMAGE = "UPDATE_IMAGE",
 }
 
 export type AppMutation<S = AppState> = {
@@ -13,6 +14,7 @@ export type AppMutation<S = AppState> = {
     [MutationTypes.UPDATE_WISH](state: S, payload: string): void,
     [MutationTypes.UPDATE_PASSWORD](state: S, payload: string): void,
     [MutationTypes.UPDATE_LINK](state: S, payload: string): void,
+    [MutationTypes.UPDATE_IMAGE](state: S, payload: string): void,
 }
 
 const mutations: MutationTree<AppState> & AppMutation = {
@@ -27,6 +29,9 @@ const mutations: MutationTree<AppState> & AppMutation = {
     },
     [MutationTypes.UPDATE_LINK](state, payload): void {
         state.link = payload
+    },
+    [MutationTypes.UPDATE_IMAGE](state, payload): void {
+        state.image = payload
     }
 }
 

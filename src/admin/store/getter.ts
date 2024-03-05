@@ -6,6 +6,7 @@ export type AppGetter = {
     get_wish(state: AppState): string,
     get_password(state: AppState): string
     get_link(state: AppState): string
+    get_image(state: AppState): string
 }
 
 
@@ -22,6 +23,9 @@ const getters: GetterTree<AppState, AppState> & AppGetter = {
     get_link(state) {
         return state.link;
     },
+    get_image(state) {
+        return state.image;
+    }
 }
 
 export default getters;

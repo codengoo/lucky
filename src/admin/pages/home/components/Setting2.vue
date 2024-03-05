@@ -15,8 +15,13 @@
             placeholder="Chúc mừng bạn"
             required
             :defaultValue="wish"
+            @update:model-value="handleWish"
           />
-          <SelectImage />
+          <SelectImage
+            @update:model-value="handleImage"
+            :data="images"
+            :defaultValue="image"
+          />
         </template>
 
         <template v-slot:button_area>
@@ -65,11 +70,38 @@ export default defineComponent({
     wish() {
       return this.$store.state.wish;
     },
+    image() {
+      return this.$store.state.image;
+    },
   },
 
+  setup() {
+    return {
+      images: [
+        { url: "images/preview.png" }, 
+        { url: "images/preview_2.png" },
+        { url: "images/preview_3.png" },
+        { url: "images/preview_4.png" },
+      ],
+    };
+  },
   methods: {
     backStep() {
       this.$router.push("/create");
+    },
+
+    handleWish(data) {
+      console.log(data);
+
+      this.wish = data;
+      this.$store.commit(MutationTypes.UPDATE_WISH, data);
+    },
+
+    handleImage(data) {
+      console.log(data);
+
+      this.image = data;
+      this.$store.commit(MutationTypes.UPDATE_IMAGE, data);
     },
 
     handleNext(data: any) {
