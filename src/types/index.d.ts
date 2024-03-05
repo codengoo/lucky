@@ -5,3 +5,15 @@ declare module '@vue/runtime-core' {
         $store: Store
     }
 }
+
+declare global {
+    interface Window {
+        WPLKPath: {
+            'admin': string,
+            'ajax': string,
+            'api': string,
+            'assets': string,
+            'page': string
+        }
+    }
+}

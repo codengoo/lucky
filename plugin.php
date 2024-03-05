@@ -22,6 +22,7 @@ use Lucky\Includes\Admin;
 use Lucky\Includes\Frontend;
 use Lucky\Api\Api;
 use Lucky\Template\Template;
+use Lucky\Database\Database;
 use Lucky\Constants\Hook;
 use Lucky\Constants\App;
 
@@ -44,13 +45,12 @@ final class LK_Kickstart {
 
     public function init_plugin() {
         new Admin();
-        // new Api();
+        new Api();
         new Frontend();
     }
 
     public function init_plugin_theme() {
         new Template();
-      
     }
 
     // Singleton pattern
@@ -66,6 +66,7 @@ final class LK_Kickstart {
 
     public function activate() {
         Template::create_custom_page();
+        Database::create_database();
 
         if (get_option('wplk_is_installed')) {
             update_option("wplk_is_installed", time());
@@ -76,6 +77,7 @@ final class LK_Kickstart {
 
     public function deactivate() {
         Template::delete_custom_page();
+        Database::delete_database();
 
         if (get_option('wplk_is_installed')) {
             update_option("wplk_is_installed", null);

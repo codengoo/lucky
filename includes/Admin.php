@@ -65,6 +65,7 @@ class Admin {
             'admin'  => admin_url('/'),
             'ajax'   => admin_url(''),
             'api'    => home_url('/wp-json'),
+            'page'   => home_url('/lucky'),
             'assets' => WPLK_PLUGIN_URL . 'assets/'
         ]);
     }

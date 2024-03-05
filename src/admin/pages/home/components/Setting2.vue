@@ -106,7 +106,6 @@ export default defineComponent({
 
     handleNext(data: any) {
       console.log(data);
-      this.$store.commit(MutationTypes.UPDATE_WISH, data.wish);
       this.$router.push("/create/step3");
     },
   },

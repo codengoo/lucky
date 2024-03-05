@@ -10,6 +10,7 @@
         "shortcode",
         "trailingslashit",
         "vuetify",
+        "wpdb",
         "WPLK"
     ]
 }

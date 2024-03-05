@@ -15,6 +15,7 @@
             placeholder="*****"
             required
             :defaultValue="password"
+            @update:model-value="handlePassword"
           />
         </template>
 
@@ -46,6 +47,7 @@ import Header from "./header.vue";
 import Form from "./form.vue";
 
 import { MutationTypes } from "@admin/store/mutation";
+import { createCard } from "../utils";
 
 export default defineComponent({
   name: "Setting3",
@@ -66,10 +68,27 @@ export default defineComponent({
     backStep() {
       this.$router.push("/create/step2");
     },
+
+    handlePassword(data) {
+      console.log(data);
+
+      this.password = data.password;
+      this.$store.commit(MutationTypes.UPDATE_PASSWORD, data);
+    },
+
     handleNext(data: any) {
       console.log(data);
-      this.$store.commit(MutationTypes.UPDATE_PASSWORD, data.password);
-      this.$router.push("/create/step4");
+      console.log(this.$store.state);
+      createCard(this.$store.state).then((data) => {
+        console.log(data);
+        
+        if (data.ok) {
+          this.$store.commit(MutationTypes.UPDATE_LINK, data.link);
+          this.$router.push("/create/step4");
+        } else {
+          alert("Không thể tạo link");
+        }
+      });
     },
   },
 });

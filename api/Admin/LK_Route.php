@@ -2,6 +2,7 @@
 
 namespace Lucky\Api\Admin;
 
+use Lucky\Database\Database;
 use WP_REST_Controller;
 
 class LK_Route extends WP_REST_Controller {
@@ -10,7 +11,7 @@ class LK_Route extends WP_REST_Controller {
 
     public function __construct() {
         $this->namespace = 'lucky/v1';
-        $this->rest_base = 'settings';
+        $this->rest_base = 'create';
     }
 
     public function register_routes() {
@@ -18,24 +19,50 @@ class LK_Route extends WP_REST_Controller {
             $this->namespace,
             '/' . $this->rest_base,
             [
-                'methods'             => 'GET',
-                'callback'            => [$this, 'get_items'],
-                'permission_callback' => '__return_true'
-                // 'args'                => $this->get_collection_params()
+                'methods'             => 'POST',
+                'callback'            => [$this, 'save_card'],
             ]
         );
     }
 
-    public function get_items($request) {
+    public function save_card($request) {
+        $parameters = $request->get_body();
+        $data = json_decode($parameters);
 
-        return rest_ensure_response([""]);
+        $data = array(
+            'acc_name' => $data->account->acc_name,
+            'acc_num' => $data->account->acc_number,
+            'acc_bank' => $data->account->bank,
+            'acc_bank_short' => $data->account->bank_short,
+            'wish' => $data->wish,
+            'password' => password_hash($data->password, PASSWORD_BCRYPT),
+            'image' => $data->image,
+            'link' => $data->link,
+        );
+
+        $id = Database::add_data($data);
+
+        $response = [
+            'link' => $id,
+            'ok' => true
+        ];
+
+        return rest_ensure_response($response);
+    }
+
+    public function get_card($request) {
+        $parameters = $request->get_body();
+        $data = json_decode($parameters);
+
+        $data = array(
+            'password' => $data->password,
+            'id' => $data->id,
+        );
+
+        Database::get_data($data);
     }
 
     public function get_items_permission_check($request) {
         return true;
-    }
-
-    public function get_collection_params() {
-        return [];
     }
 }
