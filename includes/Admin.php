@@ -2,54 +2,54 @@
 
 namespace Lucky\Includes;
 
+use Lucky\Constants\Hook;
+use Lucky\Constants\Capability;
+use Lucky\Constants\App;
+
 class Admin {
     public function __construct() {
-        error_log("admin kkk");
-        add_action("admin_menu", [$this, 'admin_menu']);
-        add_action("admin_enqueue_scripts", [$this, 'admin_content']);
+        add_action(Hook::AD_MENU, [$this, 'create_admin_menu']);
+        add_action(Hook::AD_ENQUEUE_SCRIPT, [$this, 'load_admin_content'], 99);
     }
 
-    public function admin_menu() {
-        // https://wordpress.org/documentation/article/roles-and-capabilities/#manage_options
-        $capability = 'manage_options';
-        $slug = 'lucky';
+    public function create_admin_menu() {
+        $slug = App::SLUG;
 
         add_menu_page(
-            'Lucky',
-            'Lucky cards',
-            $capability,
+            App::NAME,
+            App::FULLNAME,
+            Capability::MN_OPTIONS,
             $slug,
             [$this, 'menu_page_template'],
             'dashicons-buddicons-pm'
         );
+        
+        add_submenu_page(
+            $slug,
+            "Create your card",
+            "Create",
+            Capability::MN_OPTIONS,
+            'admin.php?page=' . $slug . '#/'
+        );
 
-        if (current_user_can($capability)) {
-            add_submenu_page(
-                $slug,
-                "Create your card",
-                "Create",
-                $capability,
-                'admin.php?page=' . $slug . '#/'
-            );
-
-            add_submenu_page(
-                $slug,
-                "View history",
-                "History",
-                $capability,
-                'admin.php?page=' . $slug . '#/history'
-            );
-
-            remove_submenu_page("lucky", "lucky");
-        }
-
-        // error_log(print_r($submenu, true));
+        add_submenu_page(
+            $slug,
+            "View history",
+            "History",
+            Capability::MN_OPTIONS,
+            'admin.php?page=' . $slug . '#/history'
+        );
+     
+        remove_submenu_page($slug, $slug);
     }
 
-    public function admin_content() {
-        error_log("admin content");
+    public function menu_page_template() {
+        echo '<div id="wplk-admin-app"></div>';
+    }
+
+    public function load_admin_content() {
+        $this->load_styles();
         $this->load_scripts();
-        // $this->load_styles();
     }
 
     public function load_scripts() {
@@ -61,16 +61,18 @@ class Admin {
         wp_enqueue_script('wplk-vendor');
         wp_enqueue_script('wplk-admin');
 
-        // wp_localize_script('wplk-admin', 'wplkAdminLocalizer', [
-        //     'adminUrl'  => admin_url('/'),
-        //     'ajaxUrl'   => admin_url('admin-ajax.php'),
-        //     'apiUrl'    => home_url('/wp-json'),
-        // ]);
-
-        error_log("admin loaded");
+        wp_localize_script('wplk-admin', 'WPLKPath', [
+            'admin'  => admin_url('/'),
+            'ajax'   => admin_url(''),
+            'api'    => home_url('/wp-json'),
+            'page'   => home_url('/lucky'),
+            'assets' => WPLK_PLUGIN_URL . 'assets/'
+        ]);
     }
 
-    public function menu_page_template() {
-        echo '<div class="wrap"><div id="wplk-admin-app"></div></div>';
+    public function load_styles() {
+        wp_register_style('wplk-admin', WPLK_PLUGIN_URL . 'assets/css/index.css');
+
+        wp_enqueue_style('wplk-admin');
     }
 }

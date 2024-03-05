@@ -6,6 +6,9 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
+    'Lucky\\Template\\' => array($baseDir . '/template'),
     'Lucky\\Includes\\' => array($baseDir . '/includes'),
+    'Lucky\\Database\\' => array($baseDir . '/database'),
+    'Lucky\\Constants\\' => array($baseDir . '/constants'),
     'Lucky\\Api\\' => array($baseDir . '/api'),
 );

@@ -21,29 +21,36 @@ require_once 'vendor/autoload.php';
 use Lucky\Includes\Admin;
 use Lucky\Includes\Frontend;
 use Lucky\Api\Api;
+use Lucky\Template\Template;
+use Lucky\Database\Database;
+use Lucky\Constants\Hook;
+use Lucky\Constants\App;
 
 final class LK_Kickstart {
-    const VERSION = '1.0.0';
-    const NONCE = 'b?le*;K7.T2jk_*(+3&[G[xAc8O~Fv)2T/Zk9N:GKBkn$piN0.N%N~X91VbCn@.4';
-
     public function __construct() {
-        $this->plugin_constants();
+        $this->set_constants();
         register_activation_hook(__FILE__, [$this, 'activate']);
         register_deactivation_hook(__FILE__, [$this, 'deactivate']);
-        add_action('plugins_loaded', [$this, 'init_plugin']);
+
+        add_action(Hook::PL_LOADED, [$this, 'init_plugin']);
+        add_action(Hook::WP_INIT, [$this, 'init_plugin_theme']);
     }
 
-    public function plugin_constants() {
-        define('WPLK_VERSION', self::VERSION);
-        define('WPLK_NONCE', self::NONCE);
-        define('WPLK_PLUGIN_PATH', trailingslashit(plugin_dir_path(__FILE__))); // file path
-        define('WPLK_PLUGIN_URL', trailingslashit(plugins_url('', __FILE__))); // url path
+    public function set_constants() {
+        define('WPLK_VERSION', App::VERSION);
+        define('WPLK_NONCE', App::NONCE);
+        define('WPLK_PLUGIN_PATH', trailingslashit(plugin_dir_path(__FILE__))); 
+        define('WPLK_PLUGIN_URL', trailingslashit(plugins_url('', __FILE__)));
     }
 
     public function init_plugin() {
         new Admin();
-        new Frontend();
         new Api();
+        new Frontend();
+    }
+
+    public function init_plugin_theme() {
+        new Template();
     }
 
     // Singleton pattern
@@ -58,23 +65,25 @@ final class LK_Kickstart {
     }
 
     public function activate() {
-        $is_installed = get_option('wplk_is_installed');
+        Template::create_custom_page();
+        Database::create_database();
 
-        if (!$is_installed) {
+        if (get_option('wplk_is_installed')) {
             update_option("wplk_is_installed", time());
         }
 
-        return $is_installed;
+        return true;
     }
 
     public function deactivate() {
-        $is_installed = get_option('wplk_is_installed');
+        Template::delete_custom_page();
+        Database::delete_database();
 
-        if ($is_installed) {
+        if (get_option('wplk_is_installed')) {
             update_option("wplk_is_installed", null);
         }
 
-        return $is_installed;
+        return true;
     }
 }
 
