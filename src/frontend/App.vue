@@ -24,19 +24,30 @@ export default defineComponent({
   },
   data() {
     return {
-      acc_name: "Nghia",
-      acc_num: "123456",
-      acc_bank: "970415",
-      acc_bank_short: "VietinBank",
-      wish: "Chúc mừng bạn",
-      image: "images/preview_4.png",
+      acc_name: "",
+      acc_num: "",
+      acc_bank: "",
+      acc_bank_short: "",
+      wish: "",
+      image: "",
     };
   },
   mounted() {
-    // getData("17", "nghia123").then((data) => {
-    //   if (data) {
-    //   }
-    // });
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const id = urlParams.get("card") || "";
+    const password = prompt("Nhập mật khẩu") || "";
+
+    getData(id, password).then((data) => {
+      if (data) {
+        this.acc_name = data.acc_name;
+        this.acc_num = data.acc_num;
+        this.acc_bank = data.acc_bank;
+        this.acc_bank_short = data.acc_bank_short;
+        this.wish = data.wish;
+        this.image = data.image;
+      }
+    });
   },
 });
 </script>

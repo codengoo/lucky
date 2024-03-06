@@ -26,12 +26,9 @@ class LK_FE_Route extends WP_REST_Controller {
     }
 
     public function get_card($request) {
-        $parameters = $request->get_body();
-        $data = json_decode($parameters);
-
         $data = array(
-            'password' => $data->password,
-            'id' => $data->id,
+            'password' => $request['password'],
+            'id' => $request['id'],
         );
 
         $data = Database::get_data($data);

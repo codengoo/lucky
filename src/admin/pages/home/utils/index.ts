@@ -57,7 +57,7 @@ export async function createCard(data: AppState): Promise<CardResponse> {
         if (response.status == 200) {        
             return {
                 ok: response.data.ok,
-                link: window.WPLKPath.page + "?" + response.data.link,
+                link: window.WPLKPath.page + "?card=" + response.data.link,
             }
         } else {
             throw new Error("");
