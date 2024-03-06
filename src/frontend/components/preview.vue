@@ -17,19 +17,34 @@ export default defineComponent({
     image: String,
   },
 
-  data(){
+  data() {
     return {
       bg: "",
       qr: "",
       context: "",
-    }
+    };
   },
 
   setup() {
     const canvas = ref();
     return { canvas };
   },
-
+  watch: {
+    name: function (val) {
+      this.draw();
+    },
+    num: function (val) {
+      this.qr.src = `https://img.vietqr.io/image/${this.bank}-${this.acc_num}-qr_only.png`;
+      this.draw();
+    },
+    bank: function (val) {
+      this.qr.src = `https://img.vietqr.io/image/${this.bank}-${this.acc_num}-qr_only.png`;
+      this.draw();
+    },
+    image: function (val) {
+      this.bg.src = window.WPLKPathx.assets + val;
+    },
+  },
   mounted() {
     this.init();
   },
