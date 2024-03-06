@@ -848,6 +848,9 @@ input[type="range"]::-ms-fill-lower {
 .z-40 {
   z-index: 40 !important;
 }
+.m-2 {
+  margin: 0.5rem !important;
+}
 .mb-2 {
   margin-bottom: 0.5rem !important;
 }
@@ -965,6 +968,9 @@ input[type="range"]::-ms-fill-lower {
 .gap-2 {
   gap: 0.5rem !important;
 }
+.gap-3 {
+  gap: 0.75rem !important;
+}
 .gap-4 {
   gap: 1rem !important;
 }
@@ -1037,11 +1043,20 @@ input[type="range"]::-ms-fill-lower {
   --tw-bg-opacity: 1 !important;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity)) !important;
 }
+.fill-gray-600 {
+  fill: #4B5563 !important;
+}
+.fill-inherit {
+  fill: inherit !important;
+}
 .p-2 {
   padding: 0.5rem !important;
 }
 .p-2\.5 {
   padding: 0.625rem !important;
+}
+.p-3 {
+  padding: 0.75rem !important;
 }
 .p-8 {
   padding: 2rem !important;
@@ -1171,6 +1186,11 @@ input.hidden-input-btn::-webkit-inner-spin-button {
   background: #1b1b1b;
 }
 
+.hover\:bg-blue-400:hover {
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(118 169 250 / var(--tw-bg-opacity)) !important;
+}
+
 .hover\:bg-blue-800:hover {
   --tw-bg-opacity: 1 !important;
   background-color: rgb(30 66 159 / var(--tw-bg-opacity)) !important;
@@ -1179,6 +1199,10 @@ input.hidden-input-btn::-webkit-inner-spin-button {
 .hover\:bg-gray-100:hover {
   --tw-bg-opacity: 1 !important;
   background-color: rgb(243 244 246 / var(--tw-bg-opacity)) !important;
+}
+
+.hover\:fill-white:hover {
+  fill: #ffffff !important;
 }
 
 .hover\:text-blue-600:hover {
@@ -1224,5 +1248,16 @@ input.hidden-input-btn::-webkit-inner-spin-button {
 .focus\:ring-gray-100:focus {
   --tw-ring-opacity: 1 !important;
   --tw-ring-color: rgb(243 244 246 / var(--tw-ring-opacity)) !important;
+}
+
+@media (min-width: 640px) {
+
+  .sm\:flex-row {
+    flex-direction: row !important;
+  }
+
+  .sm\:flex-col {
+    flex-direction: column !important;
+  }
 }
 

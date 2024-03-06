@@ -34,11 +34,11 @@ export default defineComponent({
       this.draw();
     },
     num: function (val) {
-      this.qr.src = `https://img.vietqr.io/image/${this.bank}-${this.num}-qr_only.png`;
+      this.qr.src = `https://img.vietqr.io/image/${this.bank}-${this.acc_num}-qr_only.png`;
       this.draw();
     },
     bank: function (val) {
-      this.qr.src = `https://img.vietqr.io/image/${this.bank}-${this.num}-qr_only.png`;
+      this.qr.src = `https://img.vietqr.io/image/${this.bank}-${this.acc_num}-qr_only.png`;
       this.draw();
     },
     image: function (val) {
