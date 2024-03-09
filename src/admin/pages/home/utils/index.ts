@@ -1,9 +1,6 @@
-// @ts-nocheck
-
-import { AppState } from "@/admin/store/state";
 import axios from "axios";
 
-export interface BankDataResponse {
+export interface BankResponseData {
     id: number;
     name: string;
     code: string;
@@ -17,7 +14,7 @@ export interface BankDataResponse {
 export interface BankResponse {
     code: string;
     desc: string;
-    data: BankDataResponse[];
+    data: BankResponseData[];
 }
 
 export interface CardResponse {
@@ -26,7 +23,7 @@ export interface CardResponse {
 }
 
 export type BankData = Omit<
-    BankDataResponse,
+    BankResponseData,
     "transferSupported" | "lookupSupported" | "code"
 >;
 
@@ -49,25 +46,25 @@ export async function getBankBins(): Promise<BankData[]> {
     }
 }
 
-export async function createCard(data: AppState): Promise<CardResponse> {
-    const url = window.WPLKPath.api + "/lucky/v1/create";
+// export async function createCard(data: AppState): Promise<CardResponse> {
+//     const url = window.WPLKPath.api + "/lucky/v1/create";
 
-    try {
-        const response = await axios.post<CardResponse>(url, data);        
-        if (response.status == 200) {        
-            return {
-                ok: response.data.ok,
-                link: window.WPLKPath.page + "?card=" + response.data.link,
-            }
-        } else {
-            throw new Error("");
-        }
-    } catch (error) {
-        // @ts-ignore
-        return {
-            ok: false,
-            link: "",
-        };
-    }
+//     try {
+//         const response = await axios.post<CardResponse>(url, data);        
+//         if (response.status == 200) {        
+//             return {
+//                 ok: response.data.ok,
+//                 link: window.WPLKPath.page + "?card=" + response.data.link,
+//             }
+//         } else {
+//             throw new Error("");
+//         }
+//     } catch (error) {
+//         // @ts-ignore
+//         return {
+//             ok: false,
+//             link: "",
+//         };
+//     }
 
-}
+// }

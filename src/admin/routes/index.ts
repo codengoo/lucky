@@ -1,9 +1,6 @@
-import { createRouter, createWebHashHistory } from "vue-router";
 import routes from "./routes";
 
-const router = createRouter({
-    history: createWebHashHistory(),
-    routes
-})
+import { createBrowserRouter } from "react-router-dom";
 
+const router = createBrowserRouter(routes);
 export default router;

@@ -896,9 +896,6 @@ input[type="range"]::-ms-fill-lower {
 .min-h-11 {
   min-height: 2.75rem !important;
 }
-.min-h-\[70vh\] {
-  min-height: 70vh !important;
-}
 .min-h-screen {
   min-height: 100vh !important;
 }
@@ -950,6 +947,9 @@ input[type="range"]::-ms-fill-lower {
 .flex-col {
   flex-direction: column !important;
 }
+.flex-wrap {
+  flex-wrap: wrap !important;
+}
 .items-end {
   align-items: flex-end !important;
 }
@@ -976,9 +976,6 @@ input[type="range"]::-ms-fill-lower {
 }
 .overflow-hidden {
   overflow: hidden !important;
-}
-.overflow-x-scroll {
-  overflow-x: scroll !important;
 }
 .rounded-2xl {
   border-radius: 1rem !important;
@@ -1045,9 +1042,6 @@ input[type="range"]::-ms-fill-lower {
 }
 .fill-gray-600 {
   fill: #4B5563 !important;
-}
-.fill-inherit {
-  fill: inherit !important;
 }
 .p-2 {
   padding: 0.5rem !important;
