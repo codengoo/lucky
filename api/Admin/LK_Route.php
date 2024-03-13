@@ -1,20 +1,23 @@
 <?php
 
-namespace Lucky\Api\Admin;
+namespace SharingForm\Api\Admin;
 
-use Lucky\Database\Database;
+use SharingForm\Database\BankCardDB;
 use WP_REST_Controller;
 
-class LK_Route extends WP_REST_Controller {
+class SF_Route extends WP_REST_Controller
+{
     protected $namespace;
     protected $rest_base;
 
-    public function __construct() {
-        $this->namespace = 'lucky/v1';
+    public function __construct()
+    {
+        $this->namespace = 'sharingform/v1';
         $this->rest_base = 'create';
     }
 
-    public function register_routes() {
+    public function register_routes()
+    {
         register_rest_route(
             $this->namespace,
             '/' . $this->rest_base,
@@ -25,7 +28,8 @@ class LK_Route extends WP_REST_Controller {
         );
     }
 
-    public function save_card($request) {
+    public function save_card($request)
+    {
         $parameters = $request->get_body();
         $data = json_decode($parameters);
 
@@ -40,7 +44,7 @@ class LK_Route extends WP_REST_Controller {
             'link' => $data->link,
         );
 
-        $id = Database::add_data($data);
+        $id = BankCardDB::add_data($data);
 
         $response = [
             'link' => $id,
@@ -50,7 +54,8 @@ class LK_Route extends WP_REST_Controller {
         return rest_ensure_response($response);
     }
 
-    public function get_items_permission_check($request) {
+    public function get_items_permission_check($request)
+    {
         return true;
     }
 }

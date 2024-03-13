@@ -2,9 +2,10 @@
 
 // View full hook reference at https://developer.wordpress.org/reference/hooks/
 
-namespace Lucky\Constants;
+namespace SharingForm\Constants;
 
-class Hook {
+class Hook
+{
     const AD_MENU = "admin_menu";
     const AD_ENQUEUE_SCRIPT = "admin_enqueue_scripts";
 

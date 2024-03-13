@@ -1,7 +1,7 @@
 {
-  "name": "wp-lucky",
+  "name": "wp-sharingform",
   "version": "1.0.0",
-  "description": "Make beautiful lucky cards",
+  "description": "Make beautiful cards by sharing form",
   "main": "index.js",
   "private": true,
   "scripts": {

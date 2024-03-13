@@ -13,7 +13,7 @@ export default function OptionImage({ name, value, onChange, checked }: IProps) 
   return (
     <div className="cursor-pointer relative w-fit select-none flex-none">
       <div className="h-36 overflow-hidden rounded-xl w-fit">
-        {/* <img src="window.WPLKPath.assets + value" class="h-full" /> */}
+        {/* <img src="window.WPSFPath.assets + value" class="h-full" /> */}
       </div>
 
       <div className="absolute inset-y-2 end-0 pe-2">

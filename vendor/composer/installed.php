@@ -1,6 +1,6 @@
 <?php return array(
     'root' => array(
-        'name' => 'ncn/lucky',
+        'name' => 'ncn/sharingform',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
         'reference' => 'a7260969b396331da0de2968837da284697594c5',
@@ -10,7 +10,7 @@
         'dev' => true,
     ),
     'versions' => array(
-        'ncn/lucky' => array(
+        'ncn/sharingform' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
             'reference' => 'a7260969b396331da0de2968837da284697594c5',

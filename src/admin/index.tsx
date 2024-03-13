@@ -1,15 +1,16 @@
 import React from "react";
+import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { RouterProvider } from "react-router-dom";
-import { BankQRProvider } from "./store/bankQR";
+import { BankQRProvider } from "../store/bankQR";
 import router from "./routes";
-
-// Css
 import '../index.css';
 
-const app = createRoot(document.getElementById("#wplk-admin-app")!);
+const app = createRoot(document.getElementById("wpsf-admin-app")!);
 app.render(
-    <BankQRProvider>
-        <RouterProvider router={router} />
-    </BankQRProvider>
+    <StrictMode>
+        <BankQRProvider>
+            <RouterProvider router={router} />
+        </BankQRProvider>
+    </StrictMode>
 );

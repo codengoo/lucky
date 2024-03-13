@@ -1,4 +1,4 @@
-import { Store } from '../admin/store'
+import { Store } from '../store'
 
 declare module '@vue/runtime-core' {
     interface ComponentCustomProperties {
@@ -8,14 +8,14 @@ declare module '@vue/runtime-core' {
 
 declare global {
     interface Window {
-        WPLKPath: {
+        WPSFPath: {
             'admin': string,
             'ajax': string,
             'api': string,
             'assets': string,
             'page': string
         },
-        WPLKPathx: {
+        WPSFPathx: {
             'admin': string,
             'ajax': string,
             'api': string,

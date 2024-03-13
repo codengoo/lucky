@@ -1,6 +1,6 @@
 {
-    "name": "ncn/lucky",
-    "description": "Make beautiful lucky cards",
+    "name": "ncn/sharingform",
+    "description": "Make beautiful sharingform cards",
     "authors": [
         {
             "name": "Nghiacangao",
@@ -9,11 +9,11 @@
     ],
     "autoload": {
         "psr-4": {
-            "Lucky\\Includes\\": "includes/",
-            "Lucky\\Api\\": "api/",
-            "Lucky\\Template\\": "template/",
-            "Lucky\\Constants\\": "constants/",
-            "Lucky\\Database\\": "database/"
+            "SharingForm\\Includes\\": "includes/",
+            "SharingForm\\Api\\": "api/",
+            "SharingForm\\Template\\": "template/",
+            "SharingForm\\Constants\\": "constants/",
+            "SharingForm\\Database\\": "database/"
         }
     }
 }

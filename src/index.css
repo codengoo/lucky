@@ -14,24 +14,24 @@ input.hidden-input-btn::-webkit-inner-spin-button {
   margin: 0;
 }
 
-#wplk-admin-app ::-webkit-scrollbar {
+#wpsf-admin-app ::-webkit-scrollbar {
   -webkit-appearance: none;
 }
 
-#wplk-admin-app ::-webkit-scrollbar {
+#wpsf-admin-app ::-webkit-scrollbar {
   width: 5px;
   height: 7px;
 }
 
-#wplk-admin-app ::-webkit-scrollbar-track {
+#wpsf-admin-app ::-webkit-scrollbar-track {
   background: transparent;
 }
 
-#wplk-admin-app ::-webkit-scrollbar-thumb {
+#wpsf-admin-app ::-webkit-scrollbar-thumb {
   background: #8d8d8d;
   border-radius: 99px;
 }
 
-#wplk-admin-app ::-webkit-scrollbar-thumb:hover {
+#wpsf-admin-app ::-webkit-scrollbar-thumb:hover {
   background: #1b1b1b;
 }

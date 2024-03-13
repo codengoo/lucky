@@ -6,10 +6,10 @@ import Button from "@admin/components/button";
 
 import { IoMdArrowForward } from "react-icons/io"
 
-import { BankAccount, BankQRContextType } from "@admin/store/bankQR";
+import { BankAccount, BankQRContextType } from "src/store/bankQR";
 import { useNavigate } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
-import { BankQRContext } from "@admin/store/bankQR";
+import { BankQRContext } from "src/store/bankQR";
 import { BankData, getBankBins } from "../utils";
 
 export default function Setting1() {

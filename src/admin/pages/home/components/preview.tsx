@@ -1,4 +1,4 @@
-import { BankQRContext, BankQRContextType } from "@admin/store/bankQR";
+import { BankQRContext, BankQRContextType } from "src/store/bankQR";
 import { useContext, useEffect, useRef, useState } from "react";
 
 export default function Preview() {
@@ -71,7 +71,7 @@ export default function Preview() {
   }, [state.account.bank, state.account.number])
 
   useEffect(() => {
-    bg.src = window.WPLKPath.assets + state.image;
+    bg.src = window.WPSFPath.assets + state.image;
     draw();
   }, [state.image])
 
