@@ -12,7 +12,7 @@ export default function HomeLayout() {
             <div className="p-2 flex justify-center items-center">
               <Preview />
             </div>
-            <div className="p-8 pl-10 max-w-96 re-scroll flex flex-col">
+            <div className="p-8 pl-10 max-w-96 re-scroll flex flex-col h-full">
               <Outlet />
             </div>
           </div>

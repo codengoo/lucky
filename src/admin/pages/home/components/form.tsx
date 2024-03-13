@@ -18,20 +18,20 @@ export default function Form({ onSubmit, input_component, button_element }: IPro
   }
 
   function handleSubmit() {
-    onSubmit && onSubmit(getFormData);
+    onSubmit && onSubmit(getFormData());
   }
 
   return (
     <form
-      className="flex flex-col justify-between h-full"
+      className="flex flex-col justify-between h-full pt-8"
       ref={form_feed}
       onSubmit={handleSubmit}
     >
-      <div>
+      <div className="h-full flex flex-col">
         {input_component}
       </div>
 
-      <div className="flex justify-end gap-2">
+      <div className="flex justify-end gap-2 flex-none">
         {button_element}
       </div>
     </form >

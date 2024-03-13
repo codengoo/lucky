@@ -17,10 +17,10 @@ export default function SelectImage({ data, value, onChange, id, title }: IProps
   }
 
   return (
-    <div>
-      <label htmlFor={id} className="block mb-2 text-sm font-medium text-gray-900">{title}</label>
+    <div className="flex flex-col overflow-hidden">
+      <label htmlFor={id} className="block mb-2 text-sm font-medium text-gray-900 flex-none">{title}</label>
 
-      <div className="flex flex-row flex-wrap gap-4 py-5" id={id}>
+      <div className="flex flex-row flex-wrap gap-4 py-5 overflow-y-scroll" id={id}>
         {data.map((item, index) => (
           <OptionImage
             name={id}

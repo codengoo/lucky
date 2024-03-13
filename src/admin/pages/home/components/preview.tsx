@@ -10,13 +10,17 @@ export default function Preview() {
   const canvas = useRef<HTMLCanvasElement>(null);
 
   function draw() {
-    drawImage();
-    drawQR();
-    drawText();
+    console.log("Drawing...");
+
+    if (context) {
+      drawImage();
+      drawQR();
+      drawText();
+    }
   };
 
   function drawImage() {
-    context && context.drawImage(
+    context!.drawImage(
       bg, 0, 0,
       size.width,
       size.height
@@ -24,7 +28,7 @@ export default function Preview() {
   }
 
   function drawQR() {
-    context && context.drawImage(
+    context!.drawImage(
       qr, 10, 10, 110, 110
     );
   }
@@ -35,7 +39,7 @@ export default function Preview() {
       context.fillStyle = "#FFFFFF";
       context.fillText(state.account.name, 20, size.height - 100);
       context.font = "bold 21px Lato";
-      context.fillText(state.account.bank, 20, size.height - 70);
+      context.fillText(state.account.bank_short, 20, size.height - 70);
       context.font = "bold 21px Lato";
       context.fillText(state.account.number, 20, size.height - 50);
     }
@@ -46,33 +50,37 @@ export default function Preview() {
       const parentNode = canvas.current.parentNode as HTMLElement;
       if (parentNode) {
         const rect = parentNode.getBoundingClientRect();
-
+        canvas.current.width = rect.width;
+        canvas.current.height = rect.height;
         setSize({ width: rect.width, height: rect.height });
         setContext(canvas.current.getContext("2d"));
-        if (context) {
-          context.imageSmoothingEnabled = false;
-
-        }
       }
     }
-
-    bg.onload = () => draw();
-    qr.onload = () => draw();
-
   }, [])
 
   useEffect(() => {
-    draw();
-  }, [state.account.bank_short, state.account.name])
+    if (context) {
+      context.imageSmoothingEnabled = false;
+      bg.src = window.WPLKPath.assets + state.image;
+      bg.onload = () => draw();
+    }
+  }, [context])
 
   useEffect(() => {
-    qr.src = `https://img.vietqr.io/image/${state.account.bank}-${state.account.number}-qr_only.png`;
+    draw();
+  }, [state.account.name])
+
+  useEffect(() => {
+    if (state.account.bank !== "0" && state.account.number !== "") {
+      qr.src = `https://img.vietqr.io/image/${state.account.bank}-${state.account.number}-qr_only.png`;
+      qr.onload = () => draw();
+    }
     draw();
   }, [state.account.bank, state.account.number])
 
   useEffect(() => {
     bg.src = window.WPLKPath.assets + state.image;
-    draw();
+    bg.onload = () => draw();
   }, [state.image])
 
   return (

@@ -19,7 +19,6 @@ export default function Setting2() {
   }
 
   function handleWish(data: string) {
-    console.log(data);
     changeWish(data);
   }
 
@@ -36,51 +35,48 @@ export default function Setting2() {
     setImageList([
       { value: "images/preview.png", name: "1" },
       { value: "images/preview_2.png", name: "2" },
-      { value: "images/preview_3.png", name: "3" },
-      { value: "images/preview_4.png", name: "4" },
+      { value: "images/preview_3.png", name: "3" }
     ])
-  })
+  }, [])
 
   return (
-    <div>
+    <>
       <Header
         title="Phong bao"
         subtitle="Tạo mã QR kèm lời chúc cho những người thân yêu"
       />
 
-      <div className="pt-8 h-full">
-        <Form
-          onSubmit={handleNext}
-          input_component={
-            <div>
-              <Input
-                title="Lời chúc"
-                type="text"
-                id="wish"
-                placeholder="Chúc mừng bạn"
-                required
-                value={state.wish}
-                onChange={handleWish}
-              />
+      <Form
+        onSubmit={handleNext}
+        input_component={
+          <>
+            <Input
+              title="Lời chúc"
+              type="text"
+              id="wish"
+              placeholder="Chúc mừng bạn"
+              required
+              value={state.wish}
+              onChange={handleWish}
+            />
 
-              <SelectImage
-                onChange={handleImage}
-                data={imageList}
-                value={state.image}
-                title="Chọn mẫu"
-                id="image"
-              />
-            </div>
-          }
+            <SelectImage
+              onChange={handleImage}
+              data={imageList}
+              value={state.image}
+              title="Chọn mẫu"
+              id="image"
+            />
+          </>
+        }
 
-          button_element={
-            <div>
-              <Button onClick={backStep} styleBtn="Alternative" icon_center={<IoMdArrowBack />} />
-              <Button title="Tiếp tục" icon={<IoMdArrowForward />} type="submit" />
-            </div>
-          }>
-        </Form>
-      </div>
-    </div>
+        button_element={
+          <>
+            <Button onClick={backStep} styleBtn="Alternative" icon_center={<IoMdArrowBack />} />
+            <Button title="Tiếp tục" icon={<IoMdArrowForward />} type="submit" />
+          </>
+        }>
+      </Form>
+    </>
   )
 }

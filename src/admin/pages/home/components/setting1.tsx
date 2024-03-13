@@ -57,54 +57,52 @@ export default function Setting1() {
   }
 
   return (
-    <div>
+    <>
       <Header
         title="Thông tin tài khoản"
         subtitle="Tạo mã QR kèm lời chúc cho những người thân yêu"
       />
 
-      <div className="pt-8 h-full">
-        <Form
-          onSubmit={handleNext}
-          input_component={
-            <div>
-              <Select
-                title="Ngân hàng"
-                id="bank"
-                placeholder="Chọn một ngân hàng"
-                data={bankList.map(bank => ({ name: bank.bin, value: bank.name }))}
-                value={state.account.bank}
-                onChange={handleBank}
-              />
-              <Input
-                title="Số tài khoản"
-                type="number"
-                id="number"
-                placeholder="0123456789"
-                required
-                value={state.account.number}
-                onChange={handleAccNumber}
-              />
-              <Input
-                title="Chủ sở hữu"
-                type="text"
-                id="acc_name"
-                placeholder="Trịnh Văn Mớt"
-                required
-                value={state.account.name}
-                onChange={handleAccName}
-              />
-            </div>
-          }
+      <Form
+        onSubmit={handleNext}
+        input_component={
+          <>
+            <Select
+              title="Ngân hàng"
+              id="bank"
+              placeholder="Chọn một ngân hàng"
+              data={bankList.map(bank => ({ name: bank.name, value: bank.bin }))}
+              value={state.account.bank}
+              onChange={handleBank}
+            />
+            <Input
+              title="Số tài khoản"
+              type="number"
+              id="number"
+              placeholder="0123456789"
+              required
+              value={state.account.number}
+              onChange={handleAccNumber}
+            />
+            <Input
+              title="Chủ sở hữu"
+              type="text"
+              id="acc_name"
+              placeholder="Trịnh Văn Mớt"
+              required
+              value={state.account.name}
+              onChange={handleAccName}
+            />
+          </>
+        }
 
-          button_element={
-            <div>
-              <Button title="Tiếp tục" icon={<IoMdArrowForward />} type="submit" />
-            </div>
-          }
-        >
-        </Form>
-      </div>
-    </div>
+        button_element={
+          <>
+            <Button title="Tiếp tục" icon={<IoMdArrowForward />} type="submit" />
+          </>
+        }
+      >
+      </Form>
+    </>
   )
 }

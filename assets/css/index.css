@@ -977,6 +977,9 @@ input[type="range"]::-ms-fill-lower {
 .overflow-hidden {
   overflow: hidden !important;
 }
+.overflow-y-scroll {
+  overflow-y: scroll !important;
+}
 .rounded-2xl {
   border-radius: 1rem !important;
 }

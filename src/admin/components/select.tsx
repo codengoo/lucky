@@ -25,11 +25,13 @@ export default function Select({ id, title, data, placeholder, onChange, ...rest
         {...rest}
         className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
       >
-        <option value="0" selected>{placeholder}</option>
+        <option value="0">{placeholder}</option>
 
         {
           data.map(item =>
-            <option value={item.value}>
+            <option
+              key={item.value}
+              value={item.value}>
               {item.name}
             </option>)
         }

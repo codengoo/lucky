@@ -7,7 +7,7 @@ import router from "./routes";
 // Css
 import '../index.css';
 
-const app = createRoot(document.getElementById("#wplk-admin-app")!);
+const app = createRoot(document.getElementById("wplk-admin-app")!);
 app.render(
     <BankQRProvider>
         <RouterProvider router={router} />
