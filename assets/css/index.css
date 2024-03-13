@@ -986,6 +986,9 @@ input[type="range"]::-ms-fill-lower {
 .rounded-3xl {
   border-radius: 1.5rem !important;
 }
+.rounded-full {
+  border-radius: 9999px !important;
+}
 .rounded-lg {
   border-radius: 0.5rem !important;
 }
@@ -1010,6 +1013,10 @@ input[type="range"]::-ms-fill-lower {
 }
 .border {
   border-width: 1px !important;
+}
+.border-blue-600 {
+  --tw-border-opacity: 1 !important;
+  border-color: rgb(28 100 242 / var(--tw-border-opacity)) !important;
 }
 .border-blue-700 {
   --tw-border-opacity: 1 !important;
@@ -1057,6 +1064,10 @@ input[type="range"]::-ms-fill-lower {
 }
 .p-8 {
   padding: 2rem !important;
+}
+.px-3 {
+  padding-left: 0.75rem !important;
+  padding-right: 0.75rem !important;
 }
 .px-5 {
   padding-left: 1.25rem !important;

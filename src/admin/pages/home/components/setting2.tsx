@@ -7,11 +7,13 @@ import { BankQRContext, BankQRContextType } from "@admin/store/bankQR"
 import SelectImage from "@admin/components/select_image"
 import Button from "@admin/components/button"
 import { IoMdArrowForward, IoMdArrowBack } from "react-icons/io"
+import Chip from "@admin/components/chip"
 
 export default function Setting2() {
   const navigate = useNavigate();
   const { state, changeWish, changeImage } = useContext(BankQRContext) as BankQRContextType;
   const [imageList, setImageList] = useState<{ name: string, value: string }[]>([]);
+  const [wishList, setWishList] = useState<{ name: string, value: string }[]>([]);
 
   function handleNext(data: any) {
     console.log(data);
@@ -37,6 +39,12 @@ export default function Setting2() {
       { value: "images/preview_2.png", name: "2" },
       { value: "images/preview_3.png", name: "3" }
     ])
+    setWishList([
+      { value: "1", name: "1" },
+      { value: "2", name: "2" },
+      { value: "3", name: "3" },
+      { value: "4", name: "4" }
+    ]);
   }, [])
 
   return (
@@ -59,6 +67,8 @@ export default function Setting2() {
               value={state.wish}
               onChange={handleWish}
             />
+
+            <Chip value="1" data={wishList} />
 
             <SelectImage
               onChange={handleImage}

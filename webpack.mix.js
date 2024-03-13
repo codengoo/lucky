@@ -10,13 +10,13 @@ mix.alias({
 })
 
 mix
+    .react()
     .ts('src/admin/index.tsx', 'assets/js/admin.js')
     .sourceMaps(false)
-    .react()
     .extract(["react"])
-    .postCss("src/index.css", "assets/css/index.css", [
-        require("tailwindcss"),
-    ]);
+// .postCss("src/index.css", "assets/css/index.css", [
+//     require("tailwindcss"),
+// ]);
 
 // mix
 //     .react()
@@ -24,5 +24,5 @@ mix
 //     .sourceMaps(false)
 //     .extract(["vue"]);
 
-// mix.postCss('src/index.css', 'assets/css/index.css');
+mix.postCss('src/index.css', 'assets/css/index.css');
 mix.copy("src/assets/images", "assets/images/");
