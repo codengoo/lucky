@@ -39,9 +39,12 @@ class Template {
     }
 
     static function create_message_page($title, $password, $data) {
+        error_log(print_r($data['store'], true));
+
+        $content = "<figure class='wp-block-image size-full'><img src='" . $data['store'] . "' class='wp-image-148'/></figure>";
         $new_post = array(
             'post_title'    => $title,
-            'post_content'  => json_encode($data),
+            'post_content'  =>  $content,
             'post_status'   => 'publish',
             'post_type'     => 'post',
             'post_name'     => 'lucky' . uniqid(),

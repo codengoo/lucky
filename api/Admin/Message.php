@@ -32,11 +32,14 @@ class Message extends WP_REST_Controller {
         $data = json_decode($parameters);
         $password =  $data->password;
 
+        error_log(print_r($data, true));
+
         $data = array(
             'from' => $data->from,
             'to' => $data->to,
             'message' => $data->message,
             'image' => $data->image,
+            'store' => $data->store
         );
 
         $link = Template::create_message_page("Lời nhắn từ " . $data['from'], $password, $data);

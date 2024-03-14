@@ -7,6 +7,7 @@ export interface MessageState {
     image: string;
     link: string;
     password: string;
+    store: string;
 }
 
 export type MessageContextType = {
@@ -18,7 +19,8 @@ export type MessageContextType = {
     changeMessage: (data: string) => void,
     changeImage: (data: string) => void,
     changeLink: (data: string) => void,
-    changePassword: (data: string) => void
+    changePassword: (data: string) => void,
+    changeStore: (data: string) => void
 }
 
 export const MessageContext = createContext<MessageContextType | null>(null);
@@ -30,6 +32,7 @@ const DefaultMessage: MessageState = {
     image: "images/preview.png",
     link: "",
     password: "",
+    store: "",
 }
 
 export function MessageProvider({ children }: { children: ReactNode }) {
@@ -67,11 +70,15 @@ export function MessageProvider({ children }: { children: ReactNode }) {
         setState({...state, password: data });
     }
 
+    function changeStore(data: string) {
+        setState({...state, store: data });
+    }
+
     return (
         <MessageContext.Provider value={{
             state, changeImage, changeFrom,
             changeTo, changeMessage, changeLink,
-            changePassword,
+            changePassword, changeStore,
             reset, changeAll
         }}>
             {children}

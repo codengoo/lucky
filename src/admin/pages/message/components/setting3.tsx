@@ -1,4 +1,4 @@
-import { MessageApi } from "@admin/apis";
+import { AssetApi, MessageApi } from "@admin/apis";
 import Button from "@admin/components/button";
 import Form from "@admin/components/form";
 import Header from "@admin/components/header";
@@ -10,14 +10,33 @@ import { useNavigate } from "react-router-dom";
 
 export default function Setting3() {
     const navigate = useNavigate();
-    const { state, changePassword, changeLink } = useContext(MessageContext) as MessageContextType;
+    const { state, changePassword, changeLink, changeStore } = useContext(MessageContext) as MessageContextType;
+
+    async function handleSave() {
+        var canvas = document.getElementById("canvas") as HTMLCanvasElement || null;
+
+        if (canvas) {
+            const data = canvas.toDataURL();
+            const response = await AssetApi.uploadCanvas(data);
+            return response
+        }
+    }
 
     async function handleNext() {
         console.log(state);
-        const link = await MessageApi.add(state);
-        if (link) {
-            changeLink(link);
-            navigate("/message/create/step4");
+        const im = await handleSave();
+        console.log(im);
+        
+        if (im) {
+            changeStore(im);
+            const link = await MessageApi.add({
+                ...state,
+                store: im
+            });
+            if (link) {
+                changeLink(link);
+                navigate("/message/create/step4");
+            }
         }
     }
 
