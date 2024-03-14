@@ -1,7 +1,6 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
 import { RouterProvider } from "react-router-dom";
-import { BankQRProvider } from "./store/bankQR";
 import router from "./routes";
 
 import "../index.css";

@@ -1,16 +1,25 @@
-import Setting1 from "@admin/pages/home/components/setting1";
-import Setting2 from "@admin/pages/home/components/setting2";
-import Setting3 from "@admin/pages/home/components/setting3";
+import QRSetting1 from "@admin/pages/home/components/setting1";
+import QRSetting2 from "@admin/pages/home/components/setting2";
+import QRSetting3 from "@admin/pages/home/components/setting3";
+
+import MessageSetting1 from "@admin/pages/message/components/setting1";
+import MessageSetting2 from "@admin/pages/message/components/setting2";
 
 import History from "@admin/pages/history/components/history";
 
-import { Navigate, RouteObject } from "react-router-dom";
 import HistoryPage from "@admin/pages/history";
 import HomePage from "@admin/pages/home";
+import MessagePage from "@admin/pages/message";
+
+import { Navigate, RouteObject } from "react-router-dom";
 
 const routes: Array<RouteObject> = [
     {
-        path: '/history',
+        path: "/",
+        element: <Navigate to="/qr/create" replace />
+    },
+    {
+        path: '/qr/history',
         element: <HistoryPage />,
         children: [
             {
@@ -20,27 +29,42 @@ const routes: Array<RouteObject> = [
         ]
     },
     {
-        path: "/",
-        element: <Navigate to="/create" replace />
-    },
-    {
-        path: '/create',
+        path: '/qr/create',
         element: <HomePage />,
         children: [
             {
                 index: true,
-                element: <Setting1 />,
+                element: <QRSetting1 />,
             },
             {
                 path: 'step2',
-                element: <Setting2 />,
+                element: <QRSetting2 />,
             },
             {
                 path: 'step3',
-                element: <Setting3 />,
+                element: <QRSetting3 />,
             }
         ]
-    }
+    },
+    {
+        path: '/message/create',
+        element: <MessagePage />,
+        children: [
+            {
+                index: true,
+                element: <MessageSetting1 />,
+            },
+            {
+                path: 'step2',
+                element: <MessageSetting2 />,
+            },
+            {
+                path: 'step3',
+                element: <QRSetting3 />,
+            }
+        ]
+    },
+
 ];
 
 export default routes;

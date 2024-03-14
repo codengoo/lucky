@@ -1,4 +1,4 @@
-import Preview from "@admin/components/preview"
+import Preview from "@admin/components/preview_qr"
 import { IoMdCopy, IoMdSave } from "react-icons/io";
 
 export default function Frontend() {

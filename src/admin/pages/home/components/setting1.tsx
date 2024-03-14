@@ -25,7 +25,7 @@ export default function Setting1() {
   }, [])
 
   function handleNext(data: BankAccount) {
-    navigate("/create/step2");
+    navigate("/qr/create/step2");
   }
 
   function handleBank(data: string) {
