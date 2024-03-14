@@ -15,11 +15,11 @@ mix
     .sourceMaps(false)
     .extract(["react"])
 
-// mix
-//     .react()
-//     .ts('src/frontend/index.ts', 'assets/js/frontend.js')
-//     .sourceMaps(false)
-//     .extract(["vue"]);
+mix
+    .ts('src/frontend/index.tsx', 'assets/js/frontend.js')
+    .react()
+    .sourceMaps(false)
+    .extract(["react"])
 
 mix.css('src/index.css', 'assets/css/index.css');
 mix.copy("src/assets/images", "assets/images/");

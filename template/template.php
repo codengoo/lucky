@@ -31,12 +31,10 @@ class Template {
     }
 
     function filter_template($template) {
-        if (is_page('lucky')) {
-            $custom_template = plugin_dir_path(__FILE__) . 'template_theme.php';
-            if (file_exists($custom_template)) {
-                return $custom_template;
-            }
-        }
+        // $custom_template = plugin_dir_path(__FILE__) . 'template_theme.php';
+        // if (file_exists($custom_template)) {
+        //     return $custom_template;
+        // }
         return $template;
     }
 
@@ -46,8 +44,8 @@ class Template {
             'post_content'  => json_encode($data),
             'post_status'   => 'publish',
             'post_type'     => 'post',
+            'post_name'     => 'lucky' . uniqid(),
             'post_password' => $password,
-            'post_name'     => 'lucky/' . uniqid(),
         );
 
         $post_id = wp_insert_post($new_post);
