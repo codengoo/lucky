@@ -1,14 +1,23 @@
 import Setting1 from "@admin/pages/home/components/setting1";
 import Setting2 from "@admin/pages/home/components/setting2";
 import Setting3 from "@admin/pages/home/components/setting3";
+
+import History from "@admin/pages/history/components/history";
+
 import { Navigate, RouteObject } from "react-router-dom";
-import HistoryPage from "@admin/pages/history/history";
-import HomeLayout from "@admin/pages/home/layout";
+import HistoryPage from "@admin/pages/history";
+import HomePage from "@admin/pages/home";
 
 const routes: Array<RouteObject> = [
     {
         path: '/history',
-        element: <HistoryPage />
+        element: <HistoryPage />,
+        children: [
+            {
+                index: true,
+                element: <History />
+            }
+        ]
     },
     {
         path: "/",
@@ -16,7 +25,7 @@ const routes: Array<RouteObject> = [
     },
     {
         path: '/create',
-        element: <HomeLayout />,
+        element: <HomePage />,
         children: [
             {
                 index: true,

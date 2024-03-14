@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom"
-import Form from "./form"
-import Header from "./header"
+import Form from "../../../components/form"
+import Header from "../../../components/header"
 import Input from "@admin/components/input"
 import { useContext, useEffect, useState } from "react"
 import { BankQRContext, BankQRContextType } from "@admin/store/bankQR"
@@ -8,7 +8,7 @@ import SelectImage from "@admin/components/select_image"
 import Button from "@admin/components/button"
 import { IoMdArrowForward, IoMdArrowBack } from "react-icons/io"
 import Chip from "@admin/components/chip"
-import { addChip, createCard, getChip, removeChip, uploadImage } from "../utils"
+import { AssetApi, ChipApi, CardApi } from "@admin/apis"
 
 export default function Setting2() {
   const navigate = useNavigate();
@@ -18,10 +18,10 @@ export default function Setting2() {
 
   async function handleNext(data: any) {
     if (state.image.startsWith("blob")) {
-      const link = await uploadImage(data['image_file']);
+      const link = await AssetApi.uploadImage(data['image_file']);
       if (link) {
         changeImage(link);
-        const card = await createCard({ ...state, image: link });
+        const card = await CardApi.createCard({ ...state, image: link });
         if (card) {
           changeLink(card);
           navigate("/create/step3");
@@ -44,12 +44,12 @@ export default function Setting2() {
 
   function handleRemoveChip(data: string) {
     setWishList(() => wishList.filter(item => item.value !== data));
-    removeChip(data);
+    ChipApi.remove(data);
   }
 
   function handleAddChip() {
     setWishList(() => [...wishList, { value: state.wish }]);
-    addChip(state.wish);
+    ChipApi.add(state.wish);
   }
 
   function backStep() {
@@ -62,7 +62,7 @@ export default function Setting2() {
       { value: "images/preview_2.png", name: "2" },
     ])
 
-    getChip().then(data => {
+    ChipApi.get().then(data => {
       data && setWishList(data.map(item => ({ value: item })))
     })
       ;

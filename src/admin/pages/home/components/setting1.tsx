@@ -1,5 +1,5 @@
-import Header from "./header";
-import Form from "./form";
+import Header from "@admin/components/header";
+import Form from "@admin/components/form";
 import Select from "@admin/components/select"
 import Input from "@admin/components/input"
 import Button from "@admin/components/button";
@@ -10,7 +10,8 @@ import { BankAccount, BankQRContextType } from "@admin/store/bankQR";
 import { useNavigate } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import { BankQRContext } from "@admin/store/bankQR";
-import { BankData, getBankBins } from "../utils";
+import { CardApi } from "@admin/apis";
+import { BankData } from "@admin/apis/handler/card";
 
 export default function Setting1() {
   const navigate = useNavigate();
@@ -18,7 +19,7 @@ export default function Setting1() {
   const [bankList, setBankList] = useState<BankData[]>([]);
 
   useEffect(() => {
-    getBankBins().then((data) => {
+    CardApi.getBankBins().then((data) => {
       setBankList(data);
     })
   }, [])

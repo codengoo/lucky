@@ -100,4 +100,17 @@ class Database {
             return [];
         }
     }
+
+    static function get_all_data() {
+        global $wpdb;
+        $table_name = $wpdb->prefix . App::DATABASE;
+
+        $result = $wpdb->get_results(
+            $wpdb->prepare(
+                "SELECT id, acc_name,acc_num, acc_bank,acc_bank_short,wish, image FROM $table_name"
+            )
+        );
+
+        return $result;
+    }
 }

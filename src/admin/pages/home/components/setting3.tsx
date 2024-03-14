@@ -1,11 +1,12 @@
 import { useNavigate } from "react-router-dom"
-import Form from "./form"
-import Header from "./header"
+import Form from "../../../components/form"
+import Header from "../../../components/header"
 import { useContext } from "react"
 import { BankQRContext, BankQRContextType } from "@admin/store/bankQR"
 import Input from "@admin/components/input"
 import Button from "@admin/components/button"
-import { IoMdArrowForward, IoMdCopy, IoMdOpen } from "react-icons/io"
+import { IoMdArrowForward, IoMdCopy, IoMdDownload, IoMdOpen, IoMdSave } from "react-icons/io"
+import { AssetApi } from "../../../apis"
 
 export default function Setting3() {
   const navigate = useNavigate();
@@ -24,6 +25,27 @@ export default function Setting3() {
     window.navigator.clipboard.writeText(state.link);
   }
 
+  async function handleSave() {
+    var canvas = document.getElementById("canvas") as HTMLCanvasElement || null;
+
+    if (canvas) {
+      const data = canvas.toDataURL();
+      const response = await AssetApi.uploadCanvas(data);
+      console.log(response);
+    }
+  }
+
+  function handleDownload() {
+    var link = document.createElement("a");
+    var canvas = document.getElementById("canvas") as HTMLCanvasElement || null;
+
+    if (canvas && link) {
+      link.setAttribute('download', 'card.png');
+      link.setAttribute('href', canvas.toDataURL("image/png").replace("image/png", "image/octet-stream"));
+      link.click();
+    }
+  }
+
   return (
     <div>
       <Header
@@ -35,7 +57,7 @@ export default function Setting3() {
         <Form
           onSubmit={handleNext}
           input_component={
-            <div className="flex items-end gap-2">
+            <>
               <Input
                 title="Link của bạn đây"
                 type="text"
@@ -45,10 +67,12 @@ export default function Setting3() {
               />
 
               <div className="mb-5 flex gap-2">
-                <Button onClick={handleOpen} icon_center={<IoMdOpen />} styleBtn="Alternative" />
-                <Button onClick={handleCopy} icon={<IoMdCopy />} />
+                <Button onClick={handleOpen} icon_center={<IoMdOpen />} styleBtn="Alternative" type="button" />
+                <Button onClick={handleCopy} icon_center={<IoMdCopy />} styleBtn="Alternative" type="button" />
+                <Button onClick={handleSave} icon_center={<IoMdSave />} styleBtn="Alternative" type="button" />
+                <Button onClick={handleDownload} icon_center={<IoMdDownload />} type="button" />
               </div>
-            </div>
+            </>
           }
 
           button_element={

@@ -11,21 +11,27 @@ class LK_Route extends WP_REST_Controller {
 
     public function __construct() {
         $this->namespace = 'lucky/v1';
-        $this->rest_base = 'create';
+        $this->rest_base = 'card';
     }
 
     public function register_routes() {
         register_rest_route(
             $this->namespace,
             '/' . $this->rest_base,
+           [
             [
-                'methods'             => 'POST',
-                'callback'            => [$this, 'save_card'],
+                'methods'             => \WP_REST_Server::CREATABLE,
+                'callback'            => [$this, 'add'],
+            ],
+            [
+                'methods'             => \WP_REST_Server::READABLE,
+                'callback'            => [$this, 'get'],
             ]
+           ]
         );
     }
 
-    public function save_card($request) {
+    public function add($request) {
         $parameters = $request->get_body();
         $data = json_decode($parameters);
 
@@ -44,6 +50,17 @@ class LK_Route extends WP_REST_Controller {
 
         $response = [
             'link' => $id,
+            'ok' => true
+        ];
+
+        return rest_ensure_response($response);
+    }
+
+    public function get() {
+        $data = Database::get_all_data();
+
+        $response = [
+            'data' => $data,
             'ok' => true
         ];
 
