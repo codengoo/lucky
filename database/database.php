@@ -34,6 +34,17 @@ class Database {
         dbDelta($sql);
     }
 
+    static public function delete_database() {
+        global $wpdb;
+
+        $table_name = $wpdb->prefix . App::DATABASE;
+
+        $sql = "DROP TABLE IF EXISTS $table_name;";
+
+        error_log($sql);
+        $wpdb->query($sql);
+    }
+
     static function add_data($data) {
         global $wpdb;
 
@@ -90,15 +101,31 @@ class Database {
         }
     }
 
+    static function get_all_data() {
+        global $wpdb;
+        $table_name = $wpdb->prefix . App::DATABASE;
 
-    static public function delete_database() {
+        $result = $wpdb->get_results(
+            $wpdb->prepare(
+                "SELECT id, acc_name,acc_num, acc_bank,acc_bank_short,wish, image FROM $table_name"
+            )
+        );
+
+        return $result;
+    }
+
+    static function delete_data($id) {
         global $wpdb;
 
         $table_name = $wpdb->prefix . App::DATABASE;
 
-        $sql = "DROP TABLE IF EXISTS $table_name;";
+        $result = $wpdb->get_results(
+            $wpdb->prepare(
+                "DELETE FROM $table_name WHERE id = %s",
+                $id
+            )
+        );
 
-        error_log($sql);
-        $wpdb->query($sql);
+        return $result;
     }
 }

@@ -11,7 +11,7 @@ class LK_Route extends WP_REST_Controller {
 
     public function __construct() {
         $this->namespace = 'lucky/v1';
-        $this->rest_base = 'create';
+        $this->rest_base = 'card';
     }
 
     public function register_routes() {
@@ -19,19 +19,29 @@ class LK_Route extends WP_REST_Controller {
             $this->namespace,
             '/' . $this->rest_base,
             [
-                'methods'             => 'POST',
-                'callback'            => [$this, 'save_card'],
+                [
+                    'methods'             => \WP_REST_Server::CREATABLE,
+                    'callback'            => [$this, 'add'],
+                ],
+                [
+                    'methods'             => \WP_REST_Server::READABLE,
+                    'callback'            => [$this, 'get'],
+                ],
+                [
+                    'methods'             => \WP_REST_Server::DELETABLE,
+                    'callback'            => [$this, 'remove'],
+                ]
             ]
         );
     }
 
-    public function save_card($request) {
+    public function add($request) {
         $parameters = $request->get_body();
         $data = json_decode($parameters);
 
         $data = array(
-            'acc_name' => $data->account->acc_name,
-            'acc_num' => $data->account->acc_number,
+            'acc_name' => $data->account->name,
+            'acc_num' => $data->account->number,
             'acc_bank' => $data->account->bank,
             'acc_bank_short' => $data->account->bank_short,
             'wish' => $data->wish,
@@ -50,7 +60,28 @@ class LK_Route extends WP_REST_Controller {
         return rest_ensure_response($response);
     }
 
-    public function get_items_permission_check($request) {
-        return true;
+    public function get() {
+        $data = Database::get_all_data();
+
+        $response = [
+            'data' => $data,
+            'ok' => true
+        ];
+
+        return rest_ensure_response($response);
+    }
+
+    public function remove($request) {
+        $parameters = $request->get_body();
+        $data = json_decode($parameters);
+
+        $data = Database::delete_data($data->id);
+
+        $response = [
+            'data' => $data,
+            'ok' => true
+        ];
+
+        return rest_ensure_response($response);
     }
 }
