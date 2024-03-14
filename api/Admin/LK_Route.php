@@ -18,16 +18,20 @@ class LK_Route extends WP_REST_Controller {
         register_rest_route(
             $this->namespace,
             '/' . $this->rest_base,
-           [
             [
-                'methods'             => \WP_REST_Server::CREATABLE,
-                'callback'            => [$this, 'add'],
-            ],
-            [
-                'methods'             => \WP_REST_Server::READABLE,
-                'callback'            => [$this, 'get'],
+                [
+                    'methods'             => \WP_REST_Server::CREATABLE,
+                    'callback'            => [$this, 'add'],
+                ],
+                [
+                    'methods'             => \WP_REST_Server::READABLE,
+                    'callback'            => [$this, 'get'],
+                ],
+                [
+                    'methods'             => \WP_REST_Server::DELETABLE,
+                    'callback'            => [$this, 'remove'],
+                ]
             ]
-           ]
         );
     }
 
@@ -36,8 +40,8 @@ class LK_Route extends WP_REST_Controller {
         $data = json_decode($parameters);
 
         $data = array(
-            'acc_name' => $data->account->acc_name,
-            'acc_num' => $data->account->acc_number,
+            'acc_name' => $data->account->name,
+            'acc_num' => $data->account->number,
             'acc_bank' => $data->account->bank,
             'acc_bank_short' => $data->account->bank_short,
             'wish' => $data->wish,
@@ -58,6 +62,20 @@ class LK_Route extends WP_REST_Controller {
 
     public function get() {
         $data = Database::get_all_data();
+
+        $response = [
+            'data' => $data,
+            'ok' => true
+        ];
+
+        return rest_ensure_response($response);
+    }
+
+    public function remove($request) {
+        $parameters = $request->get_body();
+        $data = json_decode($parameters);
+
+        $data = Database::delete_data($data->id);
 
         $response = [
             'data' => $data,

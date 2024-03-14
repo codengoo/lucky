@@ -113,4 +113,19 @@ class Database {
 
         return $result;
     }
+
+    static function delete_data($id) {
+        global $wpdb;
+
+        $table_name = $wpdb->prefix . App::DATABASE;
+
+        $result = $wpdb->get_results(
+            $wpdb->prepare(
+                "DELETE FROM $table_name WHERE id = %s",
+                $id
+            )
+        );
+
+        return $result;
+    }
 }

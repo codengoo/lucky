@@ -89,6 +89,19 @@ class CardApi extends Api {
             return [];
         }
     }
+
+    async deleteCard(id: string): Promise<boolean> {
+        try {
+            const response = await this.axios.delete("/card", { data: { id } });
+            if (response.status == 200) {
+                return true;
+            } else {
+                throw new Error("");
+            }
+        } catch (error) {
+            return false;
+        }
+    }
 }
 
 export default new CardApi();

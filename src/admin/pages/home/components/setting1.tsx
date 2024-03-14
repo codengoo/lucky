@@ -25,7 +25,6 @@ export default function Setting1() {
   }, [])
 
   function handleNext(data: BankAccount) {
-    console.log(data);
     navigate("/create/step2");
   }
 

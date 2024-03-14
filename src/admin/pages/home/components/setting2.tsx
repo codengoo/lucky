@@ -27,6 +27,12 @@ export default function Setting2() {
           navigate("/create/step3");
         }
       }
+    } else {
+      const card = await CardApi.createCard(state);
+      if (card) {
+        changeLink(card);
+        navigate("/create/step3");
+      }
     }
   }
 
