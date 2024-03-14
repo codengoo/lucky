@@ -8,16 +8,26 @@ import SelectImage from "@admin/components/select_image"
 import Button from "@admin/components/button"
 import { IoMdArrowForward, IoMdArrowBack } from "react-icons/io"
 import Chip from "@admin/components/chip"
+import { addChip, createCard, getChip, removeChip, uploadImage } from "../utils"
 
 export default function Setting2() {
   const navigate = useNavigate();
-  const { state, changeWish, changeImage } = useContext(BankQRContext) as BankQRContextType;
+  const { state, changeWish, changeImage, changeLink } = useContext(BankQRContext) as BankQRContextType;
   const [imageList, setImageList] = useState<{ name: string, value: string }[]>([]);
-  const [wishList, setWishList] = useState<{ name: string, value: string }[]>([]);
+  const [wishList, setWishList] = useState<{ value: string }[]>([]);
 
-  function handleNext(data: any) {
-    console.log(data);
-    navigate("/create/step3");
+  async function handleNext(data: any) {
+    if (state.image.startsWith("blob")) {
+      const link = await uploadImage(data['image_file']);
+      if (link) {
+        changeImage(link);
+        const card = await createCard({ ...state, image: link });
+        if (card) {
+          changeLink(card);
+          navigate("/create/step3");
+        }
+      }
+    }
   }
 
   function handleWish(data: string) {
@@ -25,8 +35,21 @@ export default function Setting2() {
   }
 
   function handleImage(data: string) {
-    console.log(data);
     changeImage(data);
+  }
+
+  function handleChip(data: string) {
+    changeWish(data);
+  }
+
+  function handleRemoveChip(data: string) {
+    setWishList(() => wishList.filter(item => item.value !== data));
+    removeChip(data);
+  }
+
+  function handleAddChip() {
+    setWishList(() => [...wishList, { value: state.wish }]);
+    addChip(state.wish);
   }
 
   function backStep() {
@@ -37,21 +60,19 @@ export default function Setting2() {
     setImageList([
       { value: "images/preview.png", name: "1" },
       { value: "images/preview_2.png", name: "2" },
-      { value: "images/preview_3.png", name: "3" }
     ])
-    setWishList([
-      { value: "1", name: "1" },
-      { value: "2", name: "2" },
-      { value: "3", name: "3" },
-      { value: "4", name: "4" }
-    ]);
+
+    getChip().then(data => {
+      data && setWishList(data.map(item => ({ value: item })))
+    })
+      ;
   }, [])
 
   return (
     <>
       <Header
         title="Phong bao"
-        subtitle="Tạo mã QR kèm lời chúc cho những người thân yêu"
+        subtitle="Gần xong rùi nè"
       />
 
       <Form
@@ -68,7 +89,13 @@ export default function Setting2() {
               onChange={handleWish}
             />
 
-            <Chip value="1" data={wishList} />
+            <Chip
+              value={state.wish}
+              data={wishList}
+              onClick={handleChip}
+              onAdd={handleAddChip}
+              onRemove={handleRemoveChip}
+            />
 
             <SelectImage
               onChange={handleImage}
@@ -83,7 +110,7 @@ export default function Setting2() {
         button_element={
           <>
             <Button onClick={backStep} styleBtn="Alternative" icon_center={<IoMdArrowBack />} />
-            <Button title="Tiếp tục" icon={<IoMdArrowForward />} type="submit" />
+            <Button title="Tạo thôi" icon={<IoMdArrowForward />} type="submit" />
           </>
         }>
       </Form>

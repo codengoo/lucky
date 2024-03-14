@@ -49,8 +49,4 @@ class LK_Route extends WP_REST_Controller {
 
         return rest_ensure_response($response);
     }
-
-    public function get_items_permission_check($request) {
-        return true;
-    }
 }

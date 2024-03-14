@@ -9,9 +9,10 @@ import { IoMdArrowForward, IoMdCopy, IoMdOpen } from "react-icons/io"
 
 export default function Setting3() {
   const navigate = useNavigate();
-  const { state } = useContext(BankQRContext) as BankQRContextType;
+  const { state, reset } = useContext(BankQRContext) as BankQRContextType;
 
   function handleNext() {
+    reset();
     navigate("/create");
   }
 

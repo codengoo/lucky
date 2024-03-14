@@ -34,6 +34,17 @@ class Database {
         dbDelta($sql);
     }
 
+    static public function delete_database() {
+        global $wpdb;
+
+        $table_name = $wpdb->prefix . App::DATABASE;
+
+        $sql = "DROP TABLE IF EXISTS $table_name;";
+
+        error_log($sql);
+        $wpdb->query($sql);
+    }
+
     static function add_data($data) {
         global $wpdb;
 
@@ -88,17 +99,5 @@ class Database {
         } else {
             return [];
         }
-    }
-
-
-    static public function delete_database() {
-        global $wpdb;
-
-        $table_name = $wpdb->prefix . App::DATABASE;
-
-        $sql = "DROP TABLE IF EXISTS $table_name;";
-
-        error_log($sql);
-        $wpdb->query($sql);
     }
 }

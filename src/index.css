@@ -28,7 +28,7 @@ input.hidden-input-btn::-webkit-inner-spin-button {
 }
 
 #wplk-admin-app ::-webkit-scrollbar-thumb {
-  background: #8d8d8d;
+  background: transparent;
   border-radius: 99px;
 }
 

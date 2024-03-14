@@ -1,4 +1,4 @@
-import { ReactNode, useRef } from "react"
+import { FormEvent, ReactNode, useRef } from "react"
 
 
 interface IProps {
@@ -17,17 +17,19 @@ export default function Form({ onSubmit, input_component, button_element }: IPro
     return data;
   }
 
-  function handleSubmit() {
+  function handleSubmit(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    e.stopPropagation();
     onSubmit && onSubmit(getFormData());
   }
 
   return (
     <form
-      className="flex flex-col justify-between h-full pt-8"
+      className="flex flex-col justify-between h-full pt-8 overflow-hidden"
       ref={form_feed}
       onSubmit={handleSubmit}
     >
-      <div className="h-full flex flex-col">
+      <div className="h-full flex flex-col overflow-scroll px-1">
         {input_component}
       </div>
 

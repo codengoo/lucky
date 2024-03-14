@@ -16,8 +16,8 @@ export default function OptionImage({ name, value, onChange, checked }: IProps) 
     <div
       onClick={handleClick}
       className="cursor-pointer relative w-fit select-none flex-none">
-      <div className="h-36 overflow-hidden rounded-xl w-fit">
-        <img src={window.WPLKPath.assets + value} className="h-full" />
+      <div className="h-32 w-20 overflow-hidden rounded-xl">
+        <img src={window.WPLKPath.assets + value} className="h-full w-full" />
       </div>
 
       <div className="absolute inset-y-2 end-0 pe-2">

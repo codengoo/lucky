@@ -35,6 +35,9 @@ export default function Preview() {
 
   function drawText() {
     if (context) {
+      context.font = "bold 21px Lato";
+      context.fillStyle = "#FFFFFF";
+      context.fillText(state.wish, 20, 160);
       context.font = "bold 36px Lato";
       context.fillStyle = "#FFFFFF";
       context.fillText(state.account.name, 20, size.height - 100);
@@ -61,14 +64,18 @@ export default function Preview() {
   useEffect(() => {
     if (context) {
       context.imageSmoothingEnabled = false;
-      bg.src = window.WPLKPath.assets + state.image;
+
+      bg.src = state.image.startsWith("blob") || state.image.startsWith("http")
+        ? state.image
+        : window.WPLKPath.assets + state.image;
+
       bg.onload = () => draw();
     }
   }, [context])
 
   useEffect(() => {
     draw();
-  }, [state.account.name])
+  }, [state.account.name, state.wish])
 
   useEffect(() => {
     if (state.account.bank !== "0" && state.account.number !== "") {
@@ -79,7 +86,10 @@ export default function Preview() {
   }, [state.account.bank, state.account.number])
 
   useEffect(() => {
-    bg.src = window.WPLKPath.assets + state.image;
+    bg.src = state.image.includes("blob:http") || state.image.includes("http")
+      ? state.image
+      : window.WPLKPath.assets + state.image;
+
     bg.onload = () => draw();
   }, [state.image])
 

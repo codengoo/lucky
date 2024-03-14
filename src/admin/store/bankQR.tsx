@@ -20,6 +20,7 @@ export type BankQRContextType = {
     changeWish: (wish: string) => void,
     changeLink: (link: string) => void,
     changeImage: (image: string) => void,
+    reset: () => void
 }
 
 export const BankQRContext = createContext<BankQRContextType | null>(null);
@@ -55,8 +56,15 @@ export function BankQRProvider({ children }: { children: ReactNode }) {
         setState({ ...state, image });
     }
 
+    function reset() {
+        setState(DefaultBankQR);
+    }
+
     return (
-        <BankQRContext.Provider value={{ state, changeAcc, changeImage, changeLink, changeWish }}>
+        <BankQRContext.Provider value={{
+            state, changeAcc, changeImage,
+            changeLink, changeWish, reset
+        }}>
             {children}
         </BankQRContext.Provider>
     )

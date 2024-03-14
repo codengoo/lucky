@@ -9,6 +9,8 @@ export default function Input({ id, onChange, title, ...rest }: IProps) {
   const input_form = useRef<HTMLInputElement>(null);
 
   function handleChange(event: ChangeEvent<HTMLInputElement>) {
+    event.preventDefault();
+    event.stopPropagation();
     const data = event.target.value
     onChange && onChange(data);
   }
@@ -32,21 +34,22 @@ export default function Input({ id, onChange, title, ...rest }: IProps) {
         />
 
         <div className="absolute inset-y-0 end-0 pe-2.5 flex items-center cursor-pointer" >
-          <button onClick={handleClear}>
-            <svg
-              className="w-6 h-6 text-gray-800 hover:text-blue-600"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                fillRule="evenodd"
-                d="M2 12a10 10 0 1 1 20 0 10 10 0 0 1-20 0Zm7.7-3.7a1 1 0 0 0-1.4 1.4l2.3 2.3-2.3 2.3a1 1 0 1 0 1.4 1.4l2.3-2.3 2.3 2.3a1 1 0 0 0 1.4-1.4L13.4 12l2.3-2.3a1 1 0 0 0-1.4-1.4L12 10.6 9.7 8.3Z"
-                clipRule="evenodd"
-              />
-            </svg>
-          </button>
+          {!rest.disabled &&
+            <button onClick={handleClear}>
+              <svg
+                className="w-6 h-6 text-gray-800 hover:text-blue-600"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M2 12a10 10 0 1 1 20 0 10 10 0 0 1-20 0Zm7.7-3.7a1 1 0 0 0-1.4 1.4l2.3 2.3-2.3 2.3a1 1 0 1 0 1.4 1.4l2.3-2.3 2.3 2.3a1 1 0 0 0 1.4-1.4L13.4 12l2.3-2.3a1 1 0 0 0-1.4-1.4L12 10.6 9.7 8.3Z"
+                  clipRule="evenodd"
+                />
+              </svg>
+            </button>}
         </div>
       </div >
     </div >
