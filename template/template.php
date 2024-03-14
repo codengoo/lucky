@@ -39,4 +39,20 @@ class Template {
         }
         return $template;
     }
+
+    static function create_message_page($title, $password, $data) {
+        $new_post = array(
+            'post_title'    => $title,
+            'post_content'  => json_encode($data),
+            'post_status'   => 'publish',
+            'post_type'     => 'post',
+            'post_password' => $password,
+            'post_name'     => 'lucky/' . uniqid(),
+        );
+
+        $post_id = wp_insert_post($new_post);
+        $post_url = get_permalink($post_id);
+
+        return $post_url;
+    }
 }

@@ -11,7 +11,7 @@ export default function MessagePage() {
           <div className="p-2 flex justify-center items-center">
             <PreviewMessage />
           </div>
-          <div className="p-8 pl-10 max-w-96 re-scroll flex flex-col h-full">
+          <div className="p-8 pl-10 max-w-96 w-96 re-scroll flex flex-col h-full">
             <Outlet />
           </div>
         </>

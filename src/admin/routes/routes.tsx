@@ -4,6 +4,8 @@ import QRSetting3 from "@admin/pages/home/components/setting3";
 
 import MessageSetting1 from "@admin/pages/message/components/setting1";
 import MessageSetting2 from "@admin/pages/message/components/setting2";
+import MessageSetting3 from "@admin/pages/message/components/setting3";
+import MessageSetting4 from "@admin/pages/message/components/setting4";
 
 import History from "@admin/pages/history/components/history";
 
@@ -60,7 +62,11 @@ const routes: Array<RouteObject> = [
             },
             {
                 path: 'step3',
-                element: <QRSetting3 />,
+                element: <MessageSetting3 />,
+            },
+            {
+                path: 'step4',
+                element: <MessageSetting4 />,
             }
         ]
     },

@@ -52,7 +52,7 @@ export default function Setting1() {
                         <Input
                             title="Người nhận"
                             type="text"
-                            id="from"
+                            id="to"
                             placeholder="Hà Thị Long"
                             required
                             value={state.to}
