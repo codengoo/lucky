@@ -23,11 +23,11 @@ class Admin {
             [$this, 'menu_page_template'],
             'dashicons-buddicons-pm'
         );
-        
+
         add_submenu_page(
             $slug,
             "Create your card",
-            "Create",
+            "QRCode",
             Capability::MN_OPTIONS,
             'admin.php?page=' . $slug . '#/'
         );
@@ -37,9 +37,17 @@ class Admin {
             "View history",
             "History",
             Capability::MN_OPTIONS,
-            'admin.php?page=' . $slug . '#/history'
+            'admin.php?page=' . $slug . '#/qr/history'
         );
-     
+
+        add_submenu_page(
+            $slug,
+            "Create message",
+            "Message",
+            Capability::MN_OPTIONS,
+            'admin.php?page=' . $slug . '#/message/create'
+        );
+
         remove_submenu_page($slug, $slug);
     }
 

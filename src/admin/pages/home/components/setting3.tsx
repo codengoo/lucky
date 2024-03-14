@@ -14,7 +14,7 @@ export default function Setting3() {
 
   function handleNext() {
     reset();
-    navigate("/create");
+    navigate("/qr/create");
   }
 
   function handleOpen() {

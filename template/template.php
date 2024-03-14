@@ -31,12 +31,29 @@ class Template {
     }
 
     function filter_template($template) {
-        if (is_page('lucky')) {
-            $custom_template = plugin_dir_path(__FILE__) . 'template_theme.php';
-            if (file_exists($custom_template)) {
-                return $custom_template;
-            }
-        }
+        // $custom_template = plugin_dir_path(__FILE__) . 'template_theme.php';
+        // if (file_exists($custom_template)) {
+        //     return $custom_template;
+        // }
         return $template;
+    }
+
+    static function create_message_page($title, $password, $data) {
+        error_log(print_r($data['store'], true));
+
+        $content = "<figure class='wp-block-image size-full'><img src='" . $data['store'] . "' class='wp-image-148'/></figure>";
+        $new_post = array(
+            'post_title'    => $title,
+            'post_content'  =>  $content,
+            'post_status'   => 'publish',
+            'post_type'     => 'post',
+            'post_name'     => 'lucky' . uniqid(),
+            'post_password' => $password,
+        );
+
+        $post_id = wp_insert_post($new_post);
+        $post_url = get_permalink($post_id);
+
+        return $post_url;
     }
 }

@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom";
-import Preview from "@admin/components/preview";
+import Preview from "@admin/components/preview_qr";
 import { BankQRProvider } from "@admin/store/bankQR";
 import AdminLayout from "@admin/layout";
 

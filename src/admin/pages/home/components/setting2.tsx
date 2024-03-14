@@ -24,16 +24,20 @@ export default function Setting2() {
         const card = await CardApi.createCard({ ...state, image: link });
         if (card) {
           changeLink(card);
-          navigate("/create/step3");
+          navigate("/qr/create/step3");
         }
       }
     } else {
       const card = await CardApi.createCard(state);
       if (card) {
         changeLink(card);
-        navigate("/create/step3");
+        navigate("/qr/create/step3");
       }
     }
+  }
+
+  function handleBack() {
+    navigate("/create");
   }
 
   function handleWish(data: string) {
@@ -56,10 +60,6 @@ export default function Setting2() {
   function handleAddChip() {
     setWishList(() => [...wishList, { value: state.wish }]);
     ChipApi.add(state.wish);
-  }
-
-  function backStep() {
-    navigate("/create");
   }
 
   useEffect(() => {
@@ -115,7 +115,7 @@ export default function Setting2() {
 
         button_element={
           <>
-            <Button onClick={backStep} styleBtn="Alternative" icon_center={<IoMdArrowBack />} />
+            <Button onClick={handleBack} styleBtn="Alternative" icon_center={<IoMdArrowBack />} />
             <Button title="Tạo thôi" icon={<IoMdArrowForward />} type="submit" />
           </>
         }>
