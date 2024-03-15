@@ -2,46 +2,44 @@
 
 namespace Lucky\Api\Admin;
 
-use WP_REST_Controller;
+require_once(ABSPATH . 'wp-admin/includes/image.php');
+require_once(ABSPATH . 'wp-admin/includes/file.php');
+require_once(ABSPATH . 'wp-admin/includes/media.php');
 
-class Assets extends WP_REST_Controller {
-    protected $namespace;
-    protected $rest_base;
+use Lucky\Api\BaseApi;
 
+final class Assets extends BaseApi {
     public function __construct() {
-        $this->namespace = 'lucky/v1';
-        $this->rest_base = 'asset';
+        parent::__construct("/assets");
     }
 
     public function register_routes() {
         register_rest_route(
             $this->namespace,
-            '/' . $this->rest_base,
+            $this->base,
             [
                 [
                     'methods'             => \WP_REST_Server::CREATABLE,
                     'callback'            => [$this, 'add'],
+                    'permission_callback' => [$this, 'is_admin']
                 ]
             ]
         );
 
         register_rest_route(
             $this->namespace,
-            '/' . $this->rest_base . '/canvas',
+            $this->base . '/canvas',
             [
                 [
                     'methods'             => \WP_REST_Server::CREATABLE,
                     'callback'            => [$this, 'addCanvas'],
+                    'permission_callback' => [$this, 'is_admin']
                 ]
             ]
         );
     }
 
     public function add($request) {
-        require_once(ABSPATH . 'wp-admin/includes/image.php');
-        require_once(ABSPATH . 'wp-admin/includes/file.php');
-        require_once(ABSPATH . 'wp-admin/includes/media.php');
-
         $attachment_id = media_handle_upload('image_upload', 0);
 
         if (is_wp_error($attachment_id)) {
@@ -64,48 +62,37 @@ class Assets extends WP_REST_Controller {
     }
 
     public function addCanvas($request) {
-        require_once(ABSPATH . 'wp-admin/includes/image.php');
-        require_once(ABSPATH . 'wp-admin/includes/file.php');
-        require_once(ABSPATH . 'wp-admin/includes/media.php');
+        $parameters = $request->get_body();
+        $data = json_decode($parameters);
+        $base64_image_data = $data->data;
 
-        try {
-            $parameters = $request->get_body();
-            $data = json_decode($parameters);
-            $base64_image_data = $data->data;
+        $upload_dir = wp_upload_dir();
+        $img = str_replace('data:image/png;base64,', '', $base64_image_data);
+        $img = str_replace(' ', '+', $img);
+        $decoded_img = base64_decode($img);
 
-            $upload_dir = wp_upload_dir();
-            $img = str_replace('data:image/png;base64,', '', $base64_image_data);
-            $img = str_replace(' ', '+', $img);
-            $decoded_img = base64_decode($img);
+        $filename = 'canvas_' . uniqid() . '.png';
+        $unique_filename = wp_unique_filename($upload_dir['path'], $filename);
+        $file = $upload_dir['path'] . '/' . $unique_filename;
 
-            $filename = 'canvas_' . uniqid() . '.png';
-            $unique_filename = wp_unique_filename($upload_dir['path'], $filename);
-            $file = $upload_dir['path'] . '/' . $unique_filename;
+        file_put_contents($file, $decoded_img);
 
-            file_put_contents($file, $decoded_img);
+        $attachment = array(
+            'guid'           => $upload_dir['url'] . '/' . basename($file),
+            'post_mime_type' => 'image/png',
+            'post_title'     => preg_replace('/\.[^.]+$/', '', basename($file)),
+            'post_content'   => '',
+            'post_status'    => 'inherit'
+        );
 
-            $attachment = array(
-                'guid'           => $upload_dir['url'] . '/' . basename($file),
-                'post_mime_type' => 'image/png',
-                'post_title'     => preg_replace('/\.[^.]+$/', '', basename($file)),
-                'post_content'   => '',
-                'post_status'    => 'inherit'
-            );
+        $attach_id = wp_insert_attachment($attachment, $file);
 
-            $attach_id = wp_insert_attachment($attachment, $file);
+        $attach_data = wp_generate_attachment_metadata($attach_id, $file);
+        wp_update_attachment_metadata($attach_id, $attach_data);
 
-            $attach_data = wp_generate_attachment_metadata($attach_id, $file);
-            wp_update_attachment_metadata($attach_id, $attach_data);
-
-            return rest_ensure_response([
-                'link' => $attachment['guid'],
-                'ok' => true
-            ]);
-        } catch (\Throwable $th) {
-            return rest_ensure_response([
-                'link' => '',
-                'ok' => false
-            ]);
-        }
+        return rest_ensure_response([
+            'link' => $attachment['guid'],
+            'ok' => true
+        ]);
     }
 }

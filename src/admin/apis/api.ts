@@ -8,9 +8,12 @@ export default abstract class Api {
     constructor(url: string) {
         this.root = window.WPLKPath.api + "/lucky/v1";
         this.baseUrl = this.root + url;
-        this.axios = axios.create({
-            baseURL: this.baseUrl
-        });
 
+        this.axios = axios.create({
+            baseURL: this.baseUrl,
+            headers: {
+                'X-WP-Nonce': window.WPLKPath.nonce
+            }
+        });
     }
 }

@@ -7,7 +7,7 @@ interface ResponseOutput {
 
 class AssetApi extends Api {
     constructor() {
-        super("/asset");
+        super("/assets");
     }
 
     async uploadImage(file: File): Promise<string | undefined> {
