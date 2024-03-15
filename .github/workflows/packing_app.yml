@@ -15,8 +15,6 @@ jobs:
       
       - name: Setup Php composer
         uses: php-actions/composer@v6
-        with: 
-          command: composer install
 
       - name: Setup Nodejs
         uses: actions/setup-node@v4

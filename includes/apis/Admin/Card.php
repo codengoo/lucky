@@ -5,7 +5,7 @@ namespace Lucky\Api\Admin;
 use Lucky\Database\Database;
 use WP_REST_Controller;
 
-class LK_Route extends WP_REST_Controller {
+class Card extends WP_REST_Controller {
     protected $namespace;
     protected $rest_base;
 
