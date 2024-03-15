@@ -40,8 +40,13 @@ class Template {
 
     static function create_message_page($title, $password, $data) {
         error_log(print_r($data['store'], true));
+        $x1 = '<!-- wp:image {"align":"center","id":148} -->';
+        $x2 = '<!-- /wp:image -->';
 
-        $content = "<figure class='wp-block-image size-full'><img src='" . $data['store'] . "' class='wp-image-148'/></figure>";
+        $content = "< class='wp-block-image size-full'><img src='" . $data['store'] . "' class='wp-image-148'/></
+        figure>";
+
+        $content = $x1. $content. $x2;
         $new_post = array(
             'post_title'    => $title,
             'post_content'  =>  $content,

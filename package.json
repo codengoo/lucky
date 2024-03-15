@@ -5,7 +5,8 @@
   "main": "index.js",
   "private": true,
   "scripts": {
-    "watch": "cross-env NODE_ENV=development mix watch"
+    "watch": "cross-env NODE_ENV=development mix watch",
+    "build": "cross-env NODE_ENV=production mix --production"
   },
   "author": "nghiacangao <nghiadt22.work@gmail.com>",
   "license": "GPLv3",
