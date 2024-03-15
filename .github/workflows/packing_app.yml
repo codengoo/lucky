@@ -23,3 +23,10 @@ jobs:
 
             - name: Build
               run: npm run build
+
+            - name: Create package
+              run: |
+                mkdir -p lucky
+                mv -v includes/* lucky/
+                mv -v assets/* lucky/
+
