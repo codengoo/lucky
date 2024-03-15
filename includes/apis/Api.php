@@ -20,7 +20,7 @@ class Api extends WP_REST_Controller {
         (new Suggestion())->register_routes();
         (new Assets())->register_routes();
         (new Message())->register_routes();
-        
+
         (new LK_FE_Route())->register_routes();
     }
 }

@@ -2,33 +2,32 @@
 
 namespace Lucky\Api\Admin;
 
-use WP_REST_Controller;
+use Lucky\Api\BaseApi;
 
-class Suggestion extends WP_REST_Controller {
-    protected $namespace;
-    protected $rest_base;
-
+class Suggestion extends BaseApi {
     public function __construct() {
-        $this->namespace = 'lucky/v1';
-        $this->rest_base = 'suggestion';
+        parent::__construct("/suggestion");
     }
 
     public function register_routes() {
         register_rest_route(
             $this->namespace,
-            '/' . $this->rest_base,
+            $this->rest_base,
             [
                 [
                     'methods'             => \WP_REST_Server::CREATABLE,
                     'callback'            => [$this, 'add'],
+                    'permission_callback' => [$this, 'is_admin']
                 ],
                 [
                     'methods'             => \WP_REST_Server::DELETABLE,
                     'callback'            => [$this, 'remove'],
+                    'permission_callback' => [$this, 'is_admin']
                 ],
                 [
                     'methods'             => \WP_REST_Server::READABLE,
                     'callback'            => [$this, 'get'],
+                    'permission_callback' => [$this, 'is_admin']
                 ]
             ]
         );

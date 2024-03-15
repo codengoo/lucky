@@ -2,26 +2,23 @@
 
 namespace Lucky\Api\Admin;
 
-use WP_REST_Controller;
+use Lucky\Api\BaseApi;
 use Lucky\Template\Template;
 
-class Message extends WP_REST_Controller {
-    protected $namespace;
-    protected $rest_base;
-
+class Message extends BaseApi {
     public function __construct() {
-        $this->namespace = 'lucky/v1';
-        $this->rest_base = 'message';
+        parent::__construct("/message");
     }
 
     public function register_routes() {
         register_rest_route(
             $this->namespace,
-            '/' . $this->rest_base,
+           $this->rest_base,
             [
                 [
                     'methods'             => \WP_REST_Server::CREATABLE,
                     'callback'            => [$this, 'add'],
+                    'permission_callback' => [$this, 'is_admin']
                 ]
             ]
         );
