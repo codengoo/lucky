@@ -37,7 +37,7 @@ export default function Setting2() {
   }
 
   function handleBack() {
-    navigate("/create");
+    navigate("/qr/create");
   }
 
   function handleWish(data: string) {

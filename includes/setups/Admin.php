@@ -28,7 +28,8 @@ class Admin {
             'ajax'   => admin_url(''),
             'api'    => home_url('/wp-json'),
             'page'   => home_url('/lucky'),
-            'assets' => WPLK_PLUGIN_URL . 'assets/'
+            'assets' => WPLK_PLUGIN_URL . 'assets/',
+            'nonce'  => wp_create_nonce('wp_rest')
         ]);
     }
 

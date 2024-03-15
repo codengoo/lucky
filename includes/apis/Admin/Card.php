@@ -13,7 +13,7 @@ final class Card extends BaseApi {
     public function register_routes() {
         register_rest_route(
             $this->namespace,
-            $this->rest_base,
+            $this->base,
             [
                 [
                     'methods'             => \WP_REST_Server::CREATABLE,

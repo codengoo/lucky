@@ -46,6 +46,6 @@ final class Startup {
 
     public function uninstall() {
         // Template::delete_custom_page();
-        Database::delete_database();
+        // Database::delete_database();
     }
 }

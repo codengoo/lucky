@@ -16,7 +16,7 @@ final class Assets extends BaseApi {
     public function register_routes() {
         register_rest_route(
             $this->namespace,
-            $this->rest_base,
+            $this->base,
             [
                 [
                     'methods'             => \WP_REST_Server::CREATABLE,
@@ -28,7 +28,7 @@ final class Assets extends BaseApi {
 
         register_rest_route(
             $this->namespace,
-            $this->rest_base . '/canvas',
+            $this->base . '/canvas',
             [
                 [
                     'methods'             => \WP_REST_Server::CREATABLE,

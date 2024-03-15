@@ -6,21 +6,23 @@ declare module '@vue/runtime-core' {
     }
 }
 
+
+
 declare global {
+    interface Path {
+        admin: string,
+        ajax: string,
+        api: string,
+        assets: string,
+        page: string
+    }
+
+    interface PathWithNonce extends Path {
+        nonce: string
+    }
+
     interface Window {
-        WPLKPath: {
-            'admin': string,
-            'ajax': string,
-            'api': string,
-            'assets': string,
-            'page': string
-        },
-        WPLKPathx: {
-            'admin': string,
-            'ajax': string,
-            'api': string,
-            'assets': string,
-            'page': object
-        },
+        WPLKPath: PathWithNonce,
+        WPLKPathx: Path
     }
 }
