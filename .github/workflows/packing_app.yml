@@ -27,6 +27,12 @@ jobs:
             - name: Create package
               run: |
                 mkdir -p lucky
-                mv -v includes/* lucky/
-                mv -v assets/* lucky/
+                cp -r includes/* lucky/
+                cp -r assets/* lucky/
+                cp -r vendor/* lucky/
+                cp plugin.php luck/
+            
+            - name: Create zip file
+              run: zip -r lucky.zip lucky/
+
 
