@@ -33,6 +33,6 @@ jobs:
                 cp plugin.php luck/
             
             - name: Create zip file
-              run: zip -r lucky.zip lucky/
+              run: zip -r lucky.zip lucky/ 
 
 
