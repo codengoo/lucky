@@ -52,7 +52,6 @@ jobs:
           git push origin ${{ steps.version.outputs.version }}
 
       - name: Create GitHub Release
-        if: steps.check_tag.outputs.tag_exists != ''
         uses: ncipollo/release-action@v1
         with:
           artifacts: "lucky.zip"
