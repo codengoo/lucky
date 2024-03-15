@@ -14,4 +14,6 @@ class Hook {
     const WP_ENQUEUE_SCRIPT = "wp_enqueue_scripts";
 
     const TM_INCLUDE = "template_include";
+
+    const REST_API_INIT = "rest_api_init";
 }
