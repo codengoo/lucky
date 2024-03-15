@@ -59,3 +59,4 @@ jobs:
         with:
           artifacts: "lucky.zip"
           tag: ${{ steps.version.outputs.version }}
+          allowUpdates: true

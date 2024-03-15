@@ -1,18 +1,15 @@
 <?php
 
-namespace Lucky\Includes;
+namespace Lucky\Setup;
 
 use Lucky\Constants\Hook;
 
 class Frontend {
     public function __construct() {
-        error_log('frontend_content constructor');
-        add_action(Hook::WP_ENQUEUE_SCRIPT, [$this, 'load_frontend_content'], 99);
+        add_action(Hook::WP_ENQUEUE_SCRIPT, [$this, 'load_content'], 99);
     }
 
-    public function load_frontend_content() {
-        error_log('frontend_content');
-
+    public function load_content() {
         $this->load_styles();
         $this->load_scripts();
     }

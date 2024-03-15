@@ -9,11 +9,11 @@
     ],
     "autoload": {
         "psr-4": {
-            "Lucky\\Includes\\": "includes/",
             "Lucky\\Api\\": "includes/apis/",
             "Lucky\\Template\\": "includes/templates/",
             "Lucky\\Constants\\": "includes/constants/",
-            "Lucky\\Database\\": "includes/database/"
+            "Lucky\\Database\\": "includes/database/",
+            "Lucky\\Setup\\": "includes/setups/"
         }
     }
 }
