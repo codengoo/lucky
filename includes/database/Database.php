@@ -107,7 +107,7 @@ class Database {
 
         $result = $wpdb->get_results(
             $wpdb->prepare(
-                "SELECT id, acc_name,acc_num, acc_bank,acc_bank_short,wish, image FROM $table_name"
+                "SELECT id, acc_name, acc_num, acc_bank, acc_bank_short, wish, image FROM $table_name"
             )
         );
 

@@ -13,7 +13,7 @@ class Message extends BaseApi {
     public function register_routes() {
         register_rest_route(
             $this->namespace,
-           $this->base,
+            $this->base,
             [
                 [
                     'methods'             => \WP_REST_Server::CREATABLE,
@@ -25,25 +25,21 @@ class Message extends BaseApi {
     }
 
     public function add($request) {
-        $parameters = $request->get_body();
-        $data = json_decode($parameters);
-        $password =  $data->password;
+        return $this->resolve(function () use ($request) {
+            $param = json_decode($request->get_body());
+            $password =  $param->password;
 
-        error_log(print_r($data, true));
+            $data = [
+                'from' => $param->from,
+                'to' => $param->to,
+                'message' => $param->message,
+                'image' => $param->image,
+                'store' => $param->store
+            ];
 
-        $data = array(
-            'from' => $data->from,
-            'to' => $data->to,
-            'message' => $data->message,
-            'image' => $data->image,
-            'store' => $data->store
-        );
+            $link = Template::create_message_page("Lời nhắn từ " . $data['from'], $password, $data);
 
-        $link = Template::create_message_page("Lời nhắn từ " . $data['from'], $password, $data);
-
-        return rest_ensure_response([
-            'link' => $link,
-            'ok' => false
-        ]);
+            return $link;
+        });
     }
 }

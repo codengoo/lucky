@@ -6,8 +6,6 @@ declare module '@vue/runtime-core' {
     }
 }
 
-
-
 declare global {
     interface Path {
         admin: string,

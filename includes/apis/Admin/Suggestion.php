@@ -34,41 +34,44 @@ class Suggestion extends BaseApi {
     }
 
     public function add($request) {
-        $parameters = $request->get_body();
-        $data = json_decode($parameters);
+        return $this->resolve(function () use ($request) {
+            $param = json_decode($request->get_body());
+            $data = $param->value;
 
-        $data = $data->value;
-        $prev = get_option("wplk_wish_suggestion");
+            $prev = get_option("wplk_wish_suggestion");
+            update_option("wplk_wish_suggestion", $prev . $data . ';');
 
-        update_option("wplk_wish_suggestion", $prev . $data . ';');
-        return;
+            return;
+        });
     }
 
     public function remove($request) {
-        $parameters = $request->get_body();
-        $data = json_decode($parameters);
+        return $this->resolve(function () use ($request) {
+            $param = json_decode($request->get_body());
+            $data = $param->value;
 
-        $data = $data->value;
-        $prev = get_option("wplk_wish_suggestion");
-        $prev = explode(";", $prev);
+            $prev = get_option("wplk_wish_suggestion");
+            $prev = explode(";", $prev);
 
-        $now = [];
-        for ($i = 0; $i < count($prev); $i++) {
-            if ($prev[$i] != $data)
-                array_push($now, $prev[$i]);
-        };
+            $now = [];
+            for ($i = 0; $i < count($prev); $i++) {
+                if ($prev[$i] != $data)
+                    array_push($now, $prev[$i]);
+            };
 
-        update_option("wplk_wish_suggestion", join(";", $now));
-        return;
+            update_option("wplk_wish_suggestion", join(";", $now));
+            return;
+        });
     }
 
     public function get() {
-        $prev = get_option("wplk_wish_suggestion");
-        $prev = explode(";", $prev);
-        if (count($prev) == 1) {
-            return rest_ensure_response([]);
-        } else {
-            return rest_ensure_response(array_slice($prev, 0, count($prev) - 1));
-        }
+        return $this->resolve(function () {
+            $prev = get_option("wplk_wish_suggestion");
+            $prev = explode(";", $prev);
+
+            return  count($prev) == 1
+                ? []
+                : array_slice($prev, 0, count($prev) - 1);
+        });
     }
 }
