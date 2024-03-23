@@ -10,15 +10,15 @@ final class Startup {
     public function __construct() {
         register_activation_hook(__FILE__, [$this, 'activate']);
         register_deactivation_hook(__FILE__, [$this, 'deactivate']);
-        register_uninstall_hook(__FILE__, [$this, 'uninstall']);
+        register_uninstall_hook(__FILE__, [__CLASS__, 'uninstall']);
 
         add_action(Hook::PL_LOADED, [$this, 'init_plugin']);
         // add_action(Hook::WP_INIT, [$this, 'init_theme']);
     }
 
     public function init_plugin() {
-        new Api();
         new Menu();
+        new Api();
 
         new Admin();
         new Frontend();
@@ -44,8 +44,8 @@ final class Startup {
         // Template::delete_custom_page();
     }
 
-    public function uninstall() {
+    public static function uninstall() {
         // Template::delete_custom_page();
-        // Database::delete_database();
+        Database::delete_database();
     }
 }
