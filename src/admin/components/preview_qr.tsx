@@ -1,18 +1,23 @@
 import { BankQRContext, BankQRContextType } from "@admin/store/bankQR";
 import { useContext, useEffect, useRef, useState } from "react";
 
-export default function Preview() {
-  const [qr, setQr] = useState(new Image());
-  const [bg, setBg] = useState(new Image());
-  const { state } = useContext(BankQRContext) as BankQRContextType;
-  const [size, setSize] = useState<{ width: number, height: number }>({ width: 0, height: 0 });
+interface ISize {
+  height: number;
+  width: number;
+}
+
+export default function PreviewQR() {
+  const [qr] = useState(new Image());
+  const [bg] = useState(new Image());
+  const [size, setSize] = useState<ISize>({ width: 0, height: 0 });
   const [context, setContext] = useState<CanvasRenderingContext2D | null>(null);
+  const [startTime, setStartTime] = useState<number>((new Date()).getTime())
+  const { state } = useContext(BankQRContext) as BankQRContextType;
   const canvas = useRef<HTMLCanvasElement>(null);
 
   function draw() {
-    console.log("Drawing...");
-
     if (context) {
+      console.log("Drawing...");
       drawImage();
       drawQR();
       drawText();
@@ -38,11 +43,14 @@ export default function Preview() {
       context.font = "bold 21px Lato";
       context.fillStyle = "#FFFFFF";
       context.fillText(state.wish, 20, 160);
+
       context.font = "bold 36px Lato";
       context.fillStyle = "#FFFFFF";
       context.fillText(state.account.name, 20, size.height - 100);
+
       context.font = "bold 21px Lato";
       context.fillText(state.account.bank_short, 20, size.height - 70);
+
       context.font = "bold 21px Lato";
       context.fillText(state.account.number, 20, size.height - 50);
     }
@@ -79,8 +87,16 @@ export default function Preview() {
 
   useEffect(() => {
     if (state.account.bank !== "0" && state.account.number !== "") {
-      qr.src = `https://img.vietqr.io/image/${state.account.bank}-${state.account.number}-qr_only.png`;
-      qr.onload = () => draw();
+      const now = (new Date()).getTime();
+      
+      if (now - startTime > 1000) {
+        console.log("restart");
+        qr.src = `https://img.vietqr.io/image/${state.account.bank}-${state.account.number}-qr_only.png`;
+        qr.onload = () => draw();
+        setStartTime(now);
+      } else {
+        draw();
+      }
     }
     draw();
   }, [state.account.bank, state.account.number])

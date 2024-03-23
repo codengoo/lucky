@@ -35,52 +35,40 @@ final class Card extends BaseApi {
     }
 
     public function add($request) {
-        $parameters = $request->get_body();
-        $data = json_decode($parameters);
+        return $this->resolve(function ($response) use ($request) {
+            $param = json_decode($request->get_body());
 
-        $data = array(
-            'acc_name' => $data->account->name,
-            'acc_num' => $data->account->number,
-            'acc_bank' => $data->account->bank,
-            'acc_bank_short' => $data->account->bank_short,
-            'wish' => $data->wish,
-            'password' => password_hash($data->password, PASSWORD_BCRYPT),
-            'image' => $data->image,
-            'link' => $data->link,
-        );
+            $data = [
+                'acc_name' => $param->account->name,
+                'acc_num' => $param->account->number,
+                'acc_bank' => $param->account->bank,
+                'acc_bank_short' => $param->account->bank_short,
+                'wish' => $param->wish,
+                'password' => password_hash($param->password, PASSWORD_BCRYPT),
+                'image' => $param->image,
+                'link' => $param->link
+            ];
 
-        $id = Database::add_data($data);
+            $id = Database::add_data($data);
 
-        $response = [
-            'link' => $id,
-            'ok' => true
-        ];
-
-        return rest_ensure_response($response);
+            return $id;
+        });
     }
 
     public function get() {
-        $data = Database::get_all_data();
+        return $this->resolve(function () {
+            $data = Database::get_all_data();
 
-        $response = [
-            'data' => $data,
-            'ok' => true
-        ];
-
-        return rest_ensure_response($response);
+            return $data;
+        });
     }
 
     public function remove($request) {
-        $parameters = $request->get_body();
-        $data = json_decode($parameters);
+        return $this->resolve(function () use ($request) {
+            $param = json_decode($request->get_body());
+            $id = Database::delete_data($param->id);
 
-        $data = Database::delete_data($data->id);
-
-        $response = [
-            'data' => $data,
-            'ok' => true
-        ];
-
-        return rest_ensure_response($response);
+            return $id;
+        });
     }
 }

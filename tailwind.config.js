@@ -2,9 +2,10 @@
 const defaultTheme = require('tailwindcss/defaultTheme')
 
 module.exports = {
-  purge: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
   content: [
-    "./node_modules/flowbite/**/*.js"
+    "./node_modules/flowbite/**/*.js",
+    './index.html',
+    './src/**/*.{vue,js,ts,jsx,tsx}'
   ],
   theme: {
     extend: {
@@ -13,7 +14,7 @@ module.exports = {
         'monte': ["Montserrat", ...defaultTheme.fontFamily.sans]
       }
     },
-    
+
   },
   plugins: [
     require('flowbite/plugin')

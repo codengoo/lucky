@@ -1,3 +1,4 @@
+import { ResponseData } from "src/types/api";
 import Api from "../api";
 
 class ChipApi extends Api {
@@ -8,11 +9,11 @@ class ChipApi extends Api {
     async get(): Promise<string[]> {
 
         try {
-            const response = await this.axios.get<string[]>("/");
+            const response = await this.axios.get<ResponseData<string[]>>("/");
             if (response.status == 200) {
-                return response.data;
+                return response.data.data;
             } else {
-                throw new Error("");
+                throw new Error(response.data.message);
             }
         } catch (error) {
             return [];

@@ -68,10 +68,14 @@ export default function Setting2() {
       { value: "images/preview_2.png", name: "2" },
     ])
 
-    ChipApi.get().then(data => {
-      data && setWishList(data.map(item => ({ value: item })))
-    })
-      ;
+    ChipApi.get()
+      .then(data => {
+        setWishList(data.map(item => ({ value: item })))
+      })
+      .catch(err => {
+        
+      });
+    ;
   }, [])
 
   return (

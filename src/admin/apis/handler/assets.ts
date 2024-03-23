@@ -1,9 +1,5 @@
+import { ResponseData } from "src/types/api";
 import Api from "../api";
-
-interface ResponseOutput {
-    link: string,
-    ok: boolean
-}
 
 class AssetApi extends Api {
     constructor() {
@@ -15,14 +11,14 @@ class AssetApi extends Api {
             let formData = new FormData();
             formData.append('image_upload', file);
 
-            const response = await this.axios.post<ResponseOutput>("/", formData, {
+            const response = await this.axios.post<ResponseData>("/", formData, {
                 headers: { "Content-Type": "multipart/form-data" }
             });
 
             if (response.status == 200) {
-                return response.data.link;
+                return response.data.data;
             } else {
-                throw new Error("");
+                throw new Error(response.data.message);
             }
         } catch (error) {
             return undefined;
@@ -31,12 +27,12 @@ class AssetApi extends Api {
 
     async uploadCanvas(data: string) {
         try {
-            const response = await this.axios.post<ResponseOutput>("/canvas", { data });
+            const response = await this.axios.post<ResponseData>("/canvas", { data });
 
             if (response.status == 200) {
-                return response.data.link;
+                return response.data.data;
             } else {
-                throw new Error("");
+                throw new Error(response.data.message);
             }
         } catch (error) {
             return undefined;

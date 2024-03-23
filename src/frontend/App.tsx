@@ -1,4 +1,4 @@
-import Preview from "@admin/components/preview_qr"
+import PreviewQR from "@admin/components/preview_qr"
 import { IoMdCopy, IoMdSave } from "react-icons/io";
 
 export default function Frontend() {
@@ -20,7 +20,7 @@ export default function Frontend() {
         <div
           className="rounded-xl shadow-xl flex flex-col justify-center items-center"
         >
-          <Preview />
+          <PreviewQR />
         </div>
         <div className="flex flex-row sm:flex-col">
           <button

@@ -1,10 +1,6 @@
 import { MessageState } from "@admin/store/message";
 import Api from "../api";
-
-interface ResponseOutput {
-    link: string,
-    ok: boolean
-}
+import { ResponseData } from "src/types/api";
 
 class MessageApi extends Api {
     constructor() {
@@ -13,10 +9,10 @@ class MessageApi extends Api {
 
     async add(data: MessageState): Promise<string | undefined> {
         try {
-            const response = await this.axios.post<ResponseOutput>("/", data);
+            const response = await this.axios.post<ResponseData>("/", data);
 
             if (response.status == 200) {
-                return response.data.link;
+                return response.data.data;
             } else {
                 throw new Error("");
             }
