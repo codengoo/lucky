@@ -17,17 +17,17 @@ class Suggestion extends BaseApi {
                 [
                     'methods'             => \WP_REST_Server::CREATABLE,
                     'callback'            => [$this, 'add'],
-                    // 'permission_callback' => [$this, 'is_admin']
+                    'permission_callback' => [$this, 'is_admin']
                 ],
                 [
                     'methods'             => \WP_REST_Server::DELETABLE,
                     'callback'            => [$this, 'remove'],
-                    // 'permission_callback' => [$this, 'is_admin']
+                    'permission_callback' => [$this, 'is_admin']
                 ],
                 [
                     'methods'             => \WP_REST_Server::READABLE,
                     'callback'            => [$this, 'get'],
-                    // 'permission_callback' => [$this, 'is_admin']
+                    'permission_callback' => [$this, 'is_admin']
                 ]
             ]
         );

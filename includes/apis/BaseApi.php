@@ -12,8 +12,6 @@ abstract class BaseApi extends WP_REST_Controller {
     public function __construct(string $base = '') {
         $this->namespace = 'lucky/v1';
         $this->base = $base;
-
-        error_log(print_r($this->namespace . $this->base, true));
     }
 
     public function is_admin() {
@@ -29,7 +27,7 @@ abstract class BaseApi extends WP_REST_Controller {
         } catch (\Throwable $th) {
             return rest_ensure_response([
                 'ok' => false,
-                'message' => $th->gettext
+                'message' => $th->getMessage()
             ]);
         }
     }
