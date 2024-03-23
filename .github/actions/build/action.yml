@@ -1,5 +1,5 @@
 name: "Build project"
-description: "Build the project into a single folder"
+description: "Build the preview project into a single folder"
 runs:
   using: "composite"
 
@@ -14,9 +14,11 @@ runs:
 
     - name: Install dependencies
       run: npm install
+      shell: bash
 
     - name: Build
       run: npm run build
+      shell: bash
 
     - name: Create package
       run: |
@@ -25,6 +27,8 @@ runs:
         cp -r assets lucky
         cp -r vendor lucky
         cp plugin.php lucky
+      shell: bash
 
     - name: Create zip file
       run: zip -r lucky.zip lucky/
+      shell: bash
