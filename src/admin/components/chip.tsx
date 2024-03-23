@@ -34,9 +34,9 @@ export default function Chip({ data, value, onClick, onAdd, onRemove }: IProps) 
                 <div
                     onClick={() => handleClick(item.value)}
                     key={index.toString()}
-                    className={"pl-3 pr-1 py-1 border rounded-full cursor-pointer flex-row items-center " +
+                    className={"pl-3 pr-1 py-1 border rounded-full cursor-pointer flex flex-row items-center " +
                         (item.value === value ? "border-blue-600 border-2" : "border-gray-300")} >
-                    {item.value}
+                    <span className="">{item.value}</span>
 
                     <button
                         onClick={(e) => { handleRemove(e, item.value) }}

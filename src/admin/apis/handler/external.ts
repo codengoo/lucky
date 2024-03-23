@@ -1,5 +1,4 @@
 import { BankBinData, BankResponse } from "src/types/api";
-import Api from "../api";
 import axios from "axios";
 
 class ExternalApi {

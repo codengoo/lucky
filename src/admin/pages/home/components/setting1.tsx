@@ -10,18 +10,19 @@ import { BankAccount, BankQRContextType } from "@admin/store/bankQR";
 import { useNavigate } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import { BankQRContext } from "@admin/store/bankQR";
-import { CardApi } from "@admin/apis";
-import { BankData } from "@admin/apis/handler/card";
+import { ExternalApi } from "@admin/apis";
+import { BankBinData } from "src/types/api";
 
 export default function Setting1() {
   const navigate = useNavigate();
   const { state, changeAcc } = useContext(BankQRContext) as BankQRContextType;
-  const [bankList, setBankList] = useState<BankData[]>([]);
+  const [bankList, setBankList] = useState<BankBinData[]>([]);
 
   useEffect(() => {
-    CardApi.getBankBins().then((data) => {
-      setBankList(data);
-    })
+    ExternalApi.getBankBins()
+      .then((data) => {
+        setBankList(data);
+      })
   }, [])
 
   function handleNext(data: BankAccount) {
