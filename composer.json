@@ -1,6 +1,7 @@
 {
     "name": "ncn/lucky",
     "description": "Make beautiful lucky cards",
+    "version": "1.1.0",
     "authors": [
         {
             "name": "Nghiacangao",

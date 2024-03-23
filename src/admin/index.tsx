@@ -7,10 +7,13 @@ import router from "./routes";
 import "../index.css";
 import 'react-toastify/dist/ReactToastify.css';
 
-const app = createRoot(document.getElementById("wplk-admin-app")!);
-app.render(
-    <>
-        <RouterProvider router={router} />
-        <ToastContainer />
-    </>
-);
+const el = document.getElementById("wplk-admin-app");
+if (el) {
+    const app = createRoot(el);
+    app.render(
+        <>
+            <RouterProvider router={router} />
+            <ToastContainer />
+        </>
+    );
+}

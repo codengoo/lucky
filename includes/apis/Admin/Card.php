@@ -50,7 +50,7 @@ final class Card extends BaseApi {
             ];
 
             $id = Database::add_data($data);
-            error_log(print_r($id, true));
+            
             return $id;
         });
     }

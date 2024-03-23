@@ -1,9 +1,8 @@
 name: Packing Wordpress plugin app
-run-name: ${{ github.actor }} is packing Wordpress plugin for ready download.
 
 on:
   pull_request:
-    branches: [main]
+    branches: [v1.1.0]
     types: [closed]
 
 jobs:
@@ -13,31 +12,9 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-      
-      - name: Setup Php composer
-        uses: php-actions/composer@v6
 
-      - name: Setup Nodejs
-        uses: actions/setup-node@v4
-        with:
-          node-version: "16"
-
-      - name: Install dependencies
-        run: npm install
-
-      - name: Build
-        run: npm run build
-
-      - name: Create package
-        run: |
-          mkdir lucky
-          cp -r includes lucky
-          cp -r assets lucky
-          cp -r vendor lucky
-          cp plugin.php lucky
-
-      - name: Create zip file
-        run: zip -r lucky.zip lucky/
+      - name: Build project
+        uses: ./.github/actions/build
 
       - name: Get version from package.json
         id: version
@@ -61,3 +38,4 @@ jobs:
           artifacts: "lucky.zip"
           tag: ${{ steps.version.outputs.version }}
           allowUpdates: true
+          draft: true

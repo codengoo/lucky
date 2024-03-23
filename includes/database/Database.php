@@ -7,17 +7,21 @@ use Lucky\Constants\App;
 if (!defined('ABSPATH'))
     define('ABSPATH', dirname(__FILE__) . '/');
 
+
 class Database {
+    public static function table_name(): string {
+        global $wpdb;
+        return $wpdb->prefix . App::DATABASE;
+    }
+
     public function __construct() {
     }
 
     static public function create_database() {
         global $wpdb;
-
-        $table_name = $wpdb->prefix . App::DATABASE;
         $charset_collate = $wpdb->get_charset_collate();
 
-        $sql = "CREATE TABLE IF NOT EXISTS $table_name (
+        $sql = "CREATE TABLE IF NOT EXISTS " . self::table_name() . " (
             `id` int(11) NOT NULL AUTO_INCREMENT,
             `acc_name` text DEFAULT '',
             `acc_num` text DEFAULT '',
@@ -28,7 +32,7 @@ class Database {
             `image` text DEFAULT '',
             `link` text DEFAULT '',
             PRIMARY KEY (`id`)
-          ) $charset_collate;";
+          ) $charset_collate";
 
         require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
         dbDelta($sql);
@@ -37,21 +41,16 @@ class Database {
     static public function delete_database() {
         global $wpdb;
 
-        $table_name = $wpdb->prefix . App::DATABASE;
+        $sql = "DROP TABLE IF EXISTS " . self::table_name();
 
-        $sql = "DROP TABLE IF EXISTS $table_name;";
-
-        error_log($sql);
         $wpdb->query($sql);
     }
 
     static function add_data($data) {
         global $wpdb;
 
-        $table_name = $wpdb->prefix . App::DATABASE;
-
         $wpdb->insert(
-            $table_name,
+            self::table_name(),
             array(
                 'acc_name' => $data['acc_name'],
                 'acc_num' => $data['acc_num'],
@@ -70,11 +69,9 @@ class Database {
     static function get_data($data) {
         global $wpdb;
 
-        $table_name = $wpdb->prefix . App::DATABASE;
-
         $result = $wpdb->get_results(
             $wpdb->prepare(
-                "SELECT * FROM $table_name WHERE id = %s",
+                "SELECT * FROM " . self::table_name() . " WHERE id = %s",
                 $data["id"]
             )
         );
@@ -103,11 +100,10 @@ class Database {
 
     static function get_all_data() {
         global $wpdb;
-        $table_name = $wpdb->prefix . App::DATABASE;
 
         $result = $wpdb->get_results(
             $wpdb->prepare(
-                "SELECT id, acc_name, acc_num, acc_bank, acc_bank_short, wish, image FROM $table_name"
+                "SELECT id, acc_name, acc_num, acc_bank, acc_bank_short, wish, image FROM " . self::table_name()
             )
         );
 
@@ -117,11 +113,9 @@ class Database {
     static function delete_data($id) {
         global $wpdb;
 
-        $table_name = $wpdb->prefix . App::DATABASE;
-
         $result = $wpdb->get_results(
             $wpdb->prepare(
-                "DELETE FROM $table_name WHERE id = %s",
+                "DELETE FROM " . self::table_name() . " WHERE id = %s",
                 $id
             )
         );

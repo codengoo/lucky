@@ -25,7 +25,7 @@ class Admin {
 
         wp_localize_script('wplk-admin', 'WPLKPath', [
             'admin'  => admin_url('/'),
-            'ajax'   => admin_url(''),
+            'ajax'   => admin_url('/'),
             'api'    => home_url('/wp-json'),
             'page'   => home_url('/lucky'),
             'assets' => WPLK_PLUGIN_URL . 'assets/',

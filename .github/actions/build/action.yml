@@ -1,0 +1,30 @@
+name: "Build project"
+description: "Build the project into a single folder"
+runs:
+  using: "composite"
+
+  steps:
+    - name: Setup Php composer
+      uses: php-actions/composer@v6
+
+    - name: Setup Nodejs
+      uses: actions/setup-node@v4
+      with:
+        node-version: "16"
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Build
+      run: npm run build
+
+    - name: Create package
+      run: |
+        mkdir lucky
+        cp -r includes lucky
+        cp -r assets lucky
+        cp -r vendor lucky
+        cp plugin.php lucky
+
+    - name: Create zip file
+      run: zip -r lucky.zip lucky/

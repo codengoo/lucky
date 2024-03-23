@@ -1,6 +1,6 @@
 {
   "name": "wp-lucky",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Make beautiful lucky cards",
   "main": "index.js",
   "private": true,
