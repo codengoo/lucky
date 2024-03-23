@@ -35,7 +35,7 @@ final class Card extends BaseApi {
     }
 
     public function add($request) {
-        return $this->resolve(function ($response) use ($request) {
+        return $this->resolve(function () use ($request) {
             $param = json_decode($request->get_body());
 
             $data = [
@@ -50,7 +50,7 @@ final class Card extends BaseApi {
             ];
 
             $id = Database::add_data($data);
-
+            error_log(print_r($id, true));
             return $id;
         });
     }
